@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>adminIndex</title>
+<title>用户名已存在</title>
 </head>
 <body>
-
-<h1>管理员</h1>
-
-<div>ID:${session.id}</div>
-<div><a href="exit">退出</a></div>
-<a href="addUser">添加用户</a>
+用户名已存在！
 </body>
 </html>

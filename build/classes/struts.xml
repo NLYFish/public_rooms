@@ -22,6 +22,12 @@
             <result>/WEB-INF/admin/adminIndex.jsp</result>
         </action>
         
+        <action name="addUser" class="pers.hy.public_rooms.action.UserManageAction" method="addUser">
+            <result name="userAddSuccess">/WEB-INF/admin/userAddSuccess.jsp</result>
+            <result name="userExist">/WEB-INF/admin/userExist.jsp</result>
+            <result name="userAddPage">/WEB-INF/admin/userAddPage.jsp</result>
+        </action>
+        
         <action name="user">
             <result>/WEB-INF/user/userIndex.jsp</result>
         </action>

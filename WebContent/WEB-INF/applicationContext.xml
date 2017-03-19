@@ -45,4 +45,14 @@
         <property name="login" ref="login"/>
     </bean>
     
+    <bean id="userManage" class="pers.hy.public_rooms.serviceImpl.UserManageImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    
+    <bean id="userManageAction" class="pers.hy.public_rooms.action.UserManageAction">
+        <property name="userManage" ref="userManage"/>
+    </bean>
+    
+    
+    
 </beans>
