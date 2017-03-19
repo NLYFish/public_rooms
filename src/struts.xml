@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+    <package name="public_rooms" namespace="/" extends="struts-default">
+        <action name="login" class="pers.hy.public_rooms.action.LoginAction">
+            <result name="loginPage">/WEB-INF/login/loginPage.jsp</result>
+            <result name="adminIndex" type="redirect">/admin</result>
+            <result name="userIndex" type="redirect">/user</result>
+            <result name="loginFailure">/WEB-INF/login/loginFailure.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        <action name="exit" class="pers.hy.public_rooms.action.LoginAction" method="exit">
+            <result name="exitPage">/WEB-INF/login/exitPage.jsp</result>
+            <result name="null">/WEB-INF/login/loginPage.jsp</result>
+        </action>
+        
+        <action name="admin">
+            <result>/WEB-INF/admin/adminIndex.jsp</result>
+        </action>
+        
+        <action name="user">
+            <result>/WEB-INF/user/userIndex.jsp</result>
+        </action>
+        
+        
+        
+    </package>
+</struts>

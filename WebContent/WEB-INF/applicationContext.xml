@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/public_rooms"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+    </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+                <value>pers/hy/public_rooms/bean/User.hbm.xml</value>
+                <value>pers/hy/public_rooms/bean/Admin.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="show_sql">true</prop>
+                <prop key="formal_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="userDao" class="pers.hy.public_rooms.daoImpl.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="adminDao" class="pers.hy.public_rooms.daoImpl.AdminDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="login" class="pers.hy.public_rooms.serviceImpl.LoginImpl">
+        <property name="userDao" ref="userDao"/>
+        <property name="adminDao" ref="adminDao"/>
+    </bean>
+    
+    <bean id="loginAction" class="pers.hy.public_rooms.action.LoginAction">
+        <property name="login" ref="login"/>
+    </bean>
+    
+</beans>

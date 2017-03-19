@@ -1,0 +1,12 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+       
+<hibernate-mapping>  
+    <class name="pers.hy.public_rooms.bean.Admin" table="admin">  
+        <id name="adminId" column="ADMIN_ID">  
+            <generator class="assigned"/>  
+        </id>   
+        <property name="adminPassword" column="ADMIN_PASSWORD"/>   
+    </class>  
+</hibernate-mapping>  
