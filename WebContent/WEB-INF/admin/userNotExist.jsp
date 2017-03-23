@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="refresh" content="3;url=userManage">
-<title>添加用户成功</title>
+<meta http-equiv="refresh" content="3;url=deleteUser">
+<title>用户不存在</title>
 </head>
 <body>
-添加用户成功！
+用户不存在！
 </body>
 </html>

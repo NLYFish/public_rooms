@@ -12,6 +12,7 @@
 
 <div>ID:${session.id}</div>
 <div><a href="exit">退出</a></div>
-<a href="addUser">添加用户</a>
+<div><a href="userManage">用户管理</a></div>
+<div><a href="index.jsp">首页</a></div>
 </body>
 </html>

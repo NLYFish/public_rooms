@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="refresh" content="3;url=userManage">
-<title>添加用户成功</title>
+<title>用户删除成功</title>
 </head>
 <body>
-添加用户成功！
+用户删除成功！
 </body>
 </html>

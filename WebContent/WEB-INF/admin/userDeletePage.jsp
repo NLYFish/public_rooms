@@ -5,16 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加用户</title>
+<title>删除用户</title>
 </head>
 <body>
-<h1>添加用户</h1>
 
-<s:form name="userAddForm" id="userAddForm" action="addUser" method="post">
-<s:textfield name="userAddForm.id" label="ID" />
-<s:textfield name="userAddForm.password" label="密码" />
-<s:submit value="添加"/>
+<h1>删除用户</h1>
+
+<s:form name="userDeleteForm" id="userDeleteForm" action="deleteUser" method="post">
+<s:textfield name="userDeleteForm.id" label="ID" />
+<s:submit value="删除"/>
 </s:form>
 <div><a href="userManage">返回</a></div>
+
 </body>
 </html>

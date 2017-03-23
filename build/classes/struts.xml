@@ -18,8 +18,23 @@
             <result name="null">/WEB-INF/login/loginPage.jsp</result>
         </action>
         
-        <action name="admin">
-            <result>/WEB-INF/admin/adminIndex.jsp</result>
+        <action name="admin" class="pers.hy.public_rooms.action.IndexAction">
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="userIndex">/WEB-INF/user/userIndex.jsp</result>
+            <result name="loginPage">/WEB-INF/login/loginPage.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        <action name="user" class="pers.hy.public_rooms.action.IndexAction">
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="userIndex">/WEB-INF/user/userIndex.jsp</result>
+            <result name="loginPage">/WEB-INF/login/loginPage.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        
+        <action name="userManage" class="pers.hy.public_rooms.action.UserManageAction" method="getUserList">
+            <result name="userManage">/WEB-INF/admin/userManage.jsp</result>
         </action>
         
         <action name="addUser" class="pers.hy.public_rooms.action.UserManageAction" method="addUser">
@@ -28,11 +43,12 @@
             <result name="userAddPage">/WEB-INF/admin/userAddPage.jsp</result>
         </action>
         
-        <action name="user">
-            <result>/WEB-INF/user/userIndex.jsp</result>
-        </action>
         
-        
+        <action name="deleteUser" class="pers.hy.public_rooms.action.UserManageAction" method="deleteUser">
+            <result name="userDeleteSuccess">/WEB-INF/admin/userDeleteSuccess.jsp</result>
+            <result name="userNotExist">/WEB-INF/admin/userNotExist.jsp</result>
+            <result name="userDeletePage">/WEB-INF/admin/userDeletePage.jsp</result>
+        </action> 
         
     </package>
 </struts>
