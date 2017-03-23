@@ -4,15 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>userIndex</title>
+<meta http-equiv="refresh" content="3;url=addUser">
+<title>用户名已存在</title>
 </head>
 <body>
-
-<h1>用户</h1>
-
-<div>ID:${session.id}</div>
-<div><a href="exit">退出</a></div>
-<div><a href="index.jsp">首页</a></div>
-
+用户名已存在！
 </body>
 </html>

@@ -24,7 +24,7 @@ public class LoginImpl implements Login {
 	
 	public void setSession(LoginForm loginForm){
 		ActionContext ctx=ActionContext.getContext();
-		ctx.getSession().put("type",loginForm.getType());
+		ctx.getSession().put("type",loginForm.getType()); 
 		ctx.getSession().put("id",loginForm.getId());
 	}
 	
@@ -43,7 +43,7 @@ public class LoginImpl implements Login {
 		
 		//return "loginPage"
 		if(sessionResult.equals("null")){
-			if(loginForm.getType().equals("")){
+			if(loginForm.getType().equals("")||loginForm.getId().equals("")||loginForm.getPassword().equals("")){
 				return "loginPage";
 			}else{
 				

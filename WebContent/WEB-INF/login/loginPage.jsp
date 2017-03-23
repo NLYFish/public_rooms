@@ -10,15 +10,14 @@
 <body>
 
 <h1>登录</h1>
-<p>
 
 <s:form name="loginForm" id="loginForm" action="login" method="post">
-<s:textfield name="loginForm.id" label="用户名" />
+<s:textfield name="loginForm.id" label="ID" />
 <s:password name="loginForm.password" label="密码" />
 <s:radio name ="loginForm.type" list="%{#{'0':'管理员','1':'用户'}}" value="1" label="用户类型" />
 <s:submit value="登录"/>
 </s:form>
 
-</p>
+<a href="index.jsp">首页</a>
 </body>
 </html>

@@ -9,10 +9,7 @@
 </head>
 <body>
 
-<div>已退出</div><br>
-<div><a href="login">登录</a></div>
-<div><a href="index.jsp">首页</a></div>
-
+<div>已成功退出！</div><br>
 
 </body>
 </html>
