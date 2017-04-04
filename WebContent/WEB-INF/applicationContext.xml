@@ -17,6 +17,7 @@
             <list>
                 <value>pers/hy/public_rooms/bean/User.hbm.xml</value>
                 <value>pers/hy/public_rooms/bean/Admin.hbm.xml</value>
+                <value>pers/hy/public_rooms/bean/Room.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -33,6 +34,10 @@
     </bean>
     
     <bean id="adminDao" class="pers.hy.public_rooms.daoImpl.AdminDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+     <bean id="roomDao" class="pers.hy.public_rooms.daoImpl.RoomDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
@@ -53,6 +58,13 @@
         <property name="userManage" ref="userManage"/>
     </bean>
     
+    <bean id="roomManage" class="pers.hy.public_rooms.serviceImpl.RoomManageImpl">
+        <property name="roomDao" ref="roomDao"/>
+    </bean>
+    
+    <bean id="roomManageAction" class="pers.hy.public_rooms.action.RoomManageAction">
+        <property name="roomManage" ref="roomManage"/>
+    </bean>
     
     
 </beans>

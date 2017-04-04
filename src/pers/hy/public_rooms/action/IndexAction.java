@@ -9,7 +9,7 @@ public class IndexAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		if(ctx.getSession().get("type")==null)
 		{
-			return "loginPage";
+			return "login";
 		}else{
 			
 			if(ctx.getSession().get("type").equals("0")){
