@@ -1,9 +1,9 @@
 package pers.hy.public_rooms.daoImpl;
 
 import pers.hy.public_rooms.dao.UserDao;
+import pers.hy.public_rooms.bean.Room;
 import pers.hy.public_rooms.bean.User;
 import pers.hy.public_rooms.form.UserAddForm;
-import pers.hy.public_rooms.form.UserDeleteForm;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,13 +45,11 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 		
-	public User deleteUser(UserDeleteForm userDeleteForm){
-		User user=(User)getHibernateTemplate().get(User.class,userDeleteForm.getId());
-		if(user==null){
-			return null;
-		}else{
+	public void deleteUser(String[] userSelect){
+		
+		for(int i=0;i<userSelect.length;i++){
+			User user=(User)getHibernateTemplate().get(User.class,userSelect[i]);
 			getHibernateTemplate().delete(user);
-			return user;
 		}
 	}
 	

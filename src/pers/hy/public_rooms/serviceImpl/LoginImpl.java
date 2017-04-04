@@ -44,7 +44,7 @@ public class LoginImpl implements Login {
 		//return "loginPage"
 		if(sessionResult.equals("null")){
 			if(loginForm.getType().equals("")||loginForm.getId().equals("")||loginForm.getPassword().equals("")){
-				return "loginPage";
+				return "login";
 			}else{
 				
 				//return "userIndex"
@@ -95,11 +95,11 @@ public class LoginImpl implements Login {
 	public String getExitResult(){
 		ActionContext ctx=ActionContext.getContext();
 		if(ctx.getSession().get("type")==null){	
-			return "null";
+			return "login";
 		}else{
 			ctx.getSession().remove("type");
 			ctx.getSession().remove("id");
-			return "exitPage";
+			return "login";
 		}
 	}
 }

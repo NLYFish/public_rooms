@@ -4,16 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>adminIndex</title>
+<title>公用房不存在</title>
 </head>
 <body>
-
-<h1>管理员</h1>
-
-<div>用户名:${session.id}</div>
-<div><a href="exit">退出</a></div>
-<div><a href="userManage">用户管理</a></div>
-<div><a href="roomManage">公用房管理</a></div>
-<div><a href="index.jsp">首页</a></div>
+公用房不存在！
 </body>
 </html>

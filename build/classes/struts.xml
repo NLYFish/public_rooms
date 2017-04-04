@@ -4,9 +4,11 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
     
 <struts>
-    <package name="public_rooms" namespace="/" extends="struts-default">
+    <constant name="struts.ui.theme" value="simple" />
+
+    <package name="login" namespace="/" extends="struts-default">
         <action name="login" class="pers.hy.public_rooms.action.LoginAction">
-            <result name="loginPage">/WEB-INF/login/loginPage.jsp</result>
+            <result name="login">/WEB-INF/login/login.jsp</result>
             <result name="adminIndex" type="redirect">/admin</result>
             <result name="userIndex" type="redirect">/user</result>
             <result name="loginFailure">/WEB-INF/login/loginFailure.jsp</result>
@@ -14,41 +16,63 @@
         </action>
         
         <action name="exit" class="pers.hy.public_rooms.action.LoginAction" method="exit">
-            <result name="exitPage">/WEB-INF/login/exitPage.jsp</result>
-            <result name="null">/WEB-INF/login/loginPage.jsp</result>
+            <result name="login">/WEB-INF/login/login.jsp</result>
         </action>
-        
+    </package>
+     
+    <package name="admin" namespace="/" extends="struts-default">
         <action name="admin" class="pers.hy.public_rooms.action.IndexAction">
             <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
             <result name="userIndex">/WEB-INF/user/userIndex.jsp</result>
-            <result name="loginPage">/WEB-INF/login/loginPage.jsp</result>
+            <result name="login">/WEB-INF/login/login.jsp</result>
             <result name="input">index.jsp</result>
         </action>
-        
-        <action name="user" class="pers.hy.public_rooms.action.IndexAction">
-            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
-            <result name="userIndex">/WEB-INF/user/userIndex.jsp</result>
-            <result name="loginPage">/WEB-INF/login/loginPage.jsp</result>
-            <result name="input">index.jsp</result>
-        </action>
-        
         
         <action name="userManage" class="pers.hy.public_rooms.action.UserManageAction" method="getUserList">
-            <result name="userManage">/WEB-INF/admin/userManage.jsp</result>
+            <result name="userManage">/WEB-INF/admin/userManage/userManage.jsp</result>
         </action>
         
         <action name="addUser" class="pers.hy.public_rooms.action.UserManageAction" method="addUser">
-            <result name="userAddSuccess">/WEB-INF/admin/userAddSuccess.jsp</result>
-            <result name="userExist">/WEB-INF/admin/userExist.jsp</result>
-            <result name="userAddPage">/WEB-INF/admin/userAddPage.jsp</result>
+            <result name="userAdd">/WEB-INF/admin/userManage/userAdd.jsp</result>
+            <result name="userManage" type="redirect">/userManage</result>
+        </action>
+        
+        <action name="deleteUser" class="pers.hy.public_rooms.action.UserManageAction" method="deleteUser">
+            <result name="userManage" type="redirect">/userManage</result>
+        </action> 
+        
+        <action name="roomManage" class="pers.hy.public_rooms.action.RoomManageAction" method="getRoomList">
+            <result name="roomManage">/WEB-INF/admin/roomManage/roomManage.jsp</result>
         </action>
         
         
-        <action name="deleteUser" class="pers.hy.public_rooms.action.UserManageAction" method="deleteUser">
-            <result name="userDeleteSuccess">/WEB-INF/admin/userDeleteSuccess.jsp</result>
-            <result name="userNotExist">/WEB-INF/admin/userNotExist.jsp</result>
-            <result name="userDeletePage">/WEB-INF/admin/userDeletePage.jsp</result>
-        </action> 
         
+        <action name="addRoom" class="pers.hy.public_rooms.action.RoomManageAction" method="addRoom">
+            <result name="roomAdd">/WEB-INF/admin/roomManage/roomAdd.jsp</result>
+            <result name="roomManage" type="redirect">/roomManage</result>
+        </action>
+        
+        <action name="updateRoomPage" class="pers.hy.public_rooms.action.RoomManageAction" method="updateRoomPage">
+            <result name="roomUpdate">/WEB-INF/admin/roomManage/roomUpdate.jsp</result>
+            <result name="roomManage" type="chain">roomManage</result>
+        </action>
+        
+        <action name="updateRoom" class="pers.hy.public_rooms.action.RoomManageAction" method="updateRoom">
+            <result name="roomManage" type="redirect">/roomManage</result>
+        </action>
+        
+        <action name="deleteRoom" class="pers.hy.public_rooms.action.RoomManageAction" method="deleteRoom">
+            <result name="roomManage" type="redirect">/roomManage</result> 
+        </action>
+    </package>
+    
+    
+    <package name="user" namespace="/" extends="struts-default">
+        <action name="user" class="pers.hy.public_rooms.action.IndexAction">
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="userIndex">/WEB-INF/user/userIndex.jsp</result>
+            <result name="login">/WEB-INF/login/login.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
     </package>
 </struts>
