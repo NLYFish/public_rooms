@@ -1,4 +1,3 @@
 # public_rooms
 
-login
-userManage
+admin finish
