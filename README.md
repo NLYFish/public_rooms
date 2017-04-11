@@ -1,5 +1,5 @@
 # public_rooms
 
-adminManage finish
-userManage finish
-rentManage finish
+adminManage finish<br/>
+userManage finish<br/>
+rentManage finish<br/>
