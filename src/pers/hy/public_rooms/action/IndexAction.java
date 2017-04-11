@@ -1,20 +1,20 @@
 package pers.hy.public_rooms.action;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ActionContext;
+
+import pers.hy.public_rooms.serviceImpl.HttpSessionFactory;
 
 public class IndexAction extends ActionSupport {
 
 	public String execute(){
-		ActionContext ctx=ActionContext.getContext();
-		if(ctx.getSession().get("type")==null)
+		if(HttpSessionFactory.getHttpSession("type")==null)
 		{
 			return "login";
 		}else{
 			
-			if(ctx.getSession().get("type").equals("0")){
+			if(HttpSessionFactory.getHttpSession("type").equals("0")){
 				return "adminIndex";
-			}else if(ctx.getSession().get("type").equals("1")){
+			}else if(HttpSessionFactory.getHttpSession("type").equals("1")){
 				return "userIndex";
 			}else{
 			    return "input";

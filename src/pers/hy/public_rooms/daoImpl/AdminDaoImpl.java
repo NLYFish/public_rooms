@@ -2,9 +2,10 @@ package pers.hy.public_rooms.daoImpl;
 
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import pers.hy.public_rooms.bean.Admin;
-import pers.hy.public_rooms.bean.User;
 import pers.hy.public_rooms.dao.AdminDao;
 
 public class AdminDaoImpl implements AdminDao {
@@ -23,7 +24,7 @@ public class AdminDaoImpl implements AdminDao {
 		return ht;
 	}
 	
-	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public Admin getAdminById(String id) {
 		Admin admin=(Admin)getHibernateTemplate().get(Admin.class,id);
 		return admin;

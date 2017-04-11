@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+       
+<hibernate-mapping>  
+    <class name="pers.hy.public_rooms.bean.RentLogs" table="rent_logs">  
+        <id name="no" column="NO">  
+            <generator class="identity"/>  
+        </id>   
+        <property name="roomId" column="ROOM_ID"/>
+        <property name="roomName" column="ROOM_NAME"/>  
+        <property name="renterName" column="RENTER_NAME"/>
+        <property name="renterId" column="RENTER_ID"/>   
+        <property name="renterPhone" column="RENTER_PHONE"/> 
+        <property name="rentStartDate" column="RENT_START_DATE"/>
+        <property name="rentEndDate" column="RENT_END_DATE"/> 
+        <property name="rentHire" column="RENT_HIRE"/>    
+        <property name="rentOther" column="RENT_OTHER"/>
+    </class>  
+</hibernate-mapping>  

@@ -1,16 +1,18 @@
 package pers.hy.public_rooms.daoImpl;
 
 import pers.hy.public_rooms.dao.UserDao;
-import pers.hy.public_rooms.bean.Room;
 import pers.hy.public_rooms.bean.User;
 import pers.hy.public_rooms.form.UserAddForm;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
 public class UserDaoImpl implements UserDao {
 	
 	private HibernateTemplate ht=null;
@@ -27,6 +29,7 @@ public class UserDaoImpl implements UserDao {
 		return ht;
 	}
 	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public User getUserById(String id){
 		User user=(User)getHibernateTemplate().get(User.class, id);
 		return user;
@@ -53,10 +56,10 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 	
-	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public List getUserList(){
 		String sql="select * from user";
-		Session session=getHibernateTemplate().getSessionFactory().openSession();
+		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
 		List<User> userList=session.createSQLQuery(sql).addEntity(User.class).list();
 		return userList;
 	}
