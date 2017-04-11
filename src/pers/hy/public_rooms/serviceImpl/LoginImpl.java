@@ -22,24 +22,9 @@ public class LoginImpl implements Login {
 		this.adminDao=adminDao;
 	}
 	
-	public void setSession(LoginForm loginForm){
-		ActionContext ctx=ActionContext.getContext();
-		ctx.getSession().put("type",loginForm.getType()); 
-		ctx.getSession().put("id",loginForm.getId());
-	}
-	
-	public String getSessionResult(){
-		ActionContext ctx=ActionContext.getContext();
-		if(ctx.getSession().get("type")==null){	
-			return "null";
-		}else{
-			return (String)ctx.getSession().get("type");
-		}
-	}
-	
 	public String getLoginResult(LoginForm loginForm){
 		
-		String sessionResult=getSessionResult();
+		String sessionResult=HttpSessionFactory.getHttpSession("type");
 		
 		//return "loginPage"
 		if(sessionResult.equals("null")){
@@ -52,13 +37,18 @@ public class LoginImpl implements Login {
 					User u=userDao.getUserById(loginForm.getId());
 					if(u!=null){
 						if(u.getUserPassword().equals(loginForm.getPassword())){
-							setSession(loginForm);
+							HttpSessionFactory.setHttpSession("type",loginForm.getType());
+							HttpSessionFactory.setHttpSession("id",loginForm.getId());
 							return "userIndex";
 						}else{
-							return "loginFailure";
+							ActionContext ctx=ActionContext.getContext();
+							ctx.put("loginFailure","loginFailure");
+							return "login";
 						}	
 					}else{
-						return "loginFailure";
+						ActionContext ctx=ActionContext.getContext();
+						ctx.put("loginFailure","loginFailure");
+						return "login";
 					}
 					
 					//return "adminIndex"
@@ -67,16 +57,23 @@ public class LoginImpl implements Login {
 					Admin a=adminDao.getAdminById(loginForm.getId());
 					if(a!=null){
 						if(a.getAdminPassword().equals(loginForm.getPassword())){
-							setSession(loginForm);
+							HttpSessionFactory.setHttpSession("type",loginForm.getType());
+							HttpSessionFactory.setHttpSession("id",loginForm.getId());
 							return "adminIndex";
 						}else{
-							return "loginFailure";
+							ActionContext ctx=ActionContext.getContext();
+							ctx.put("loginFailure","loginFailure");
+							return "login";
 						}	
 					}else{
-						return "loginFailure";
+						ActionContext ctx=ActionContext.getContext();
+						ctx.put("loginFailure","loginFailure");
+						return "login";
 					}
 				}else{
-					    return "loginFailure";
+					ActionContext ctx=ActionContext.getContext();
+					ctx.put("loginFailure","loginFailure");
+					return "login";
 				}	
 			}
 			

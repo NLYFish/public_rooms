@@ -18,49 +18,114 @@ public class RoomManageImpl implements RoomManage {
 	}
 	
 	public String getRoomList(RoomQueryForm roomQueryForm) {
-		ActionContext ctx=ActionContext.getContext();
-		ctx.put("rooms", roomDao.getRoomList(roomQueryForm));
-		return "roomManage";
+		
+		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		if(sessionResult==null){
+			return "login";
+		}else if(sessionResult.equals("1")){
+			return "userIndex";
+		}else if(sessionResult.equals("0")){
+			ActionContext ctx=ActionContext.getContext();
+			ctx.put("rooms", roomDao.getRoomList(roomQueryForm));
+			return "roomManage";
+		}else{
+			return "input";
+		}
+
 	}
 
 	public String addRoom(RoomAddForm roomAddForm){
-		if(roomAddForm.getId().equals("")||roomAddForm.getName().equals("")
-				||roomAddForm.getBuilding().equals("")||roomAddForm.getFloor().equals("")
-				||roomAddForm.getArea().equals("")){
-			return "roomAdd";
-		}else{
-			Room room=roomDao.addRoom(roomAddForm);
-			if(room==null){
-				ActionContext ctx=ActionContext.getContext();
-				ctx.put("exist", "exist");
+		
+		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		if(sessionResult==null){
+			return "roomManage";
+		}else if(sessionResult.equals("1")){
+			return "roomManage";
+		}else if(sessionResult.equals("0")){
+			
+			if(roomAddForm.getId().equals("")||roomAddForm.getName().equals("")
+					||roomAddForm.getBuilding().equals("")||roomAddForm.getFloor().equals("")
+					||roomAddForm.getArea().equals("")){
 				return "roomAdd";
 			}else{
-				return "roomManage";
+				Room room=roomDao.addRoom(roomAddForm);
+				if(room==null){
+					ActionContext ctx=ActionContext.getContext();
+					ctx.put("exist", "exist");
+					return "roomAdd";
+				}else{
+					return "roomManage";
+				}
+				
 			}
+		}else{
+			return "input";
 		}
+		
+		
 	}
 	
 	public String updateRoomPage(String roomUpdateId){
-		Room room=roomDao.updateRoomPage(roomUpdateId);
-		if(room==null){
-			ActionContext ctx=ActionContext.getContext();
-			ctx.put("notExist", "notExist");
-			return "roomManage"; 
+		
+		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		if(sessionResult==null){
+			return "roomManage";
+		}else if(sessionResult.equals("1")){
+			return "roomManage";
+		}else if(sessionResult.equals("0")){
+			
+			Room room=roomDao.updateRoomPage(roomUpdateId);
+			if(room==null){
+				ActionContext ctx=ActionContext.getContext();
+				ctx.put("notExist", "notExist");
+				return "roomManage"; 
+			}else{
+				ActionContext ctx=ActionContext.getContext();
+				ctx.put("updateRoom", room);
+				return "roomUpdate";
+			}
+			
 		}else{
-			ActionContext ctx=ActionContext.getContext();
-			ctx.put("updateRoom", room);
-			return "roomUpdate";
+			return "input";
 		}
+		
+	
 	}
 	
 	public String updateRoom(RoomUpdateForm roomUpdateForm){
-		roomDao.updateRoom(roomUpdateForm);
-		return "roomManage";
+		
+		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		if(sessionResult==null){
+			return "roomManage";
+		}else if(sessionResult.equals("1")){
+			return "roomManage";
+		}else if(sessionResult.equals("0")){
+			
+			roomDao.updateRoom(roomUpdateForm);
+			return "roomManage";
+			
+		}else{
+			return "input";
+		}
+		
 	}
 	
 	public String deleteRoom(String[] roomSelect){
-		roomDao.deleteRoom(roomSelect);
-		return "roomManage";
+		
+		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		if(sessionResult==null){
+			return "roomManage";
+		}else if(sessionResult.equals("1")){
+			return "roomManage";
+		}else if(sessionResult.equals("0")){
+			
+			roomDao.deleteRoom(roomSelect);
+			return "roomManage";
+			
+		}else{
+			return "input";
+		}
+		
 	}
 	
 }

@@ -5,14 +5,16 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import pers.hy.public_rooms.bean.Room;
-import pers.hy.public_rooms.bean.User;
 import pers.hy.public_rooms.dao.RoomDao;
 import pers.hy.public_rooms.form.RoomQueryForm;
 import pers.hy.public_rooms.form.RoomAddForm;
 import pers.hy.public_rooms.form.RoomUpdateForm;
 
+@Transactional
 public class RoomDaoImpl implements RoomDao {
 
 	private HibernateTemplate ht=null;
@@ -29,8 +31,8 @@ public class RoomDaoImpl implements RoomDao {
 		return ht;
 	}
 	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public List getRoomList(RoomQueryForm roomQueryForm) {
-		System.out.println(roomQueryForm.getRoomBuilding());
 		String sql="select * from room ";
 		boolean b=true;
 		if (!roomQueryForm.getRoomId().equals("")) {
@@ -69,7 +71,7 @@ public class RoomDaoImpl implements RoomDao {
 			}
 		}
 		
-		Session session=getHibernateTemplate().getSessionFactory().openSession();
+		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
 		List<Room> roomList=session.createSQLQuery(sql).addEntity(Room.class).list();
 		return roomList;
 	}
@@ -93,7 +95,7 @@ public class RoomDaoImpl implements RoomDao {
 		}
 	}
 	
-	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public Room updateRoomPage(String roomUpdateId){
 		Room room=(Room)getHibernateTemplate().get(Room.class,roomUpdateId);
 		if(room==null){

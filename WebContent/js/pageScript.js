@@ -52,6 +52,7 @@
          }
          showPage();
          preText();
+         firstText();
          nextLink();
          lastLink();
      }
@@ -67,6 +68,7 @@
          showPage();
          preLink();
          nextText();
+         lastText();
          firstLink();
      }
 
@@ -109,8 +111,13 @@
          }
          totalPage.innerHTML = pageCount();
          pageNum.innerHTML = '1';
-         nextLink();
-         lastLink();
+         
+         if(numberRowsInTable>pageSize){
+             nextLink();
+             lastLink();
+         } 
+         
+
      }
 
      start();
