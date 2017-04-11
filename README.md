@@ -1,3 +1,5 @@
 # public_rooms
 
-admin finish
+adminManage finish
+userManage finish
+rentManage finish
