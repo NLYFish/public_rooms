@@ -6,7 +6,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pers.hy.public_rooms.bean.Hire;
+import pers.hy.public_rooms.bean.RentHire;
 import pers.hy.public_rooms.bean.Rent;
 import pers.hy.public_rooms.bean.RentLogs;
 import pers.hy.public_rooms.bean.Room;
@@ -120,7 +120,7 @@ public class RentDaoImpl implements RentDao {
 		}else{
 			
 			Rent rent=(Rent)getHibernateTemplate().get(Rent.class, rentAddForm.getRoomId());
-			Hire hire=(Hire)getHibernateTemplate().get(Hire.class, rentAddForm.getRoomId());
+			RentHire hire=(RentHire)getHibernateTemplate().get(RentHire.class, rentAddForm.getRoomId());
 			if(rent==null){	
 				Rent r=new Rent();
 				r.setRoomId(rentAddForm.getRoomId());
@@ -202,7 +202,7 @@ public class RentDaoImpl implements RentDao {
 	public void updateRent(RentUpdateForm rentUpdateForm){
 					
 		Rent r=(Rent)getHibernateTemplate().get(Rent.class, rentUpdateForm.getRoomId());
-		Hire hire=(Hire)getHibernateTemplate().get(Hire.class, rentUpdateForm.getRoomId());
+		RentHire hire=(RentHire)getHibernateTemplate().get(RentHire.class, rentUpdateForm.getRoomId());
 		
 			r.setRoomId(rentUpdateForm.getRoomId());
 			r.setRoomName(rentUpdateForm.getRoomName());

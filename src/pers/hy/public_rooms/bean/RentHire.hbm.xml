@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+       
+<hibernate-mapping>  
+    <class name="pers.hy.public_rooms.bean.RentHire" table="rent_hire">  
+        <id name="roomId" column="ROOM_ID">  
+            <generator class="assigned"/>  
+        </id>   
+        <property name="roomName" column="ROOM_NAME"/>  
+        <property name="hire" column="RENT_HIRE"/>    
+    </class>  
+</hibernate-mapping>  

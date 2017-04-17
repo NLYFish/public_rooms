@@ -24,7 +24,7 @@
                 <value>pers/hy/public_rooms/bean/Room.hbm.xml</value>
                 <value>pers/hy/public_rooms/bean/Rent.hbm.xml</value>
                 <value>pers/hy/public_rooms/bean/RentLogs.hbm.xml</value>
-                <value>pers/hy/public_rooms/bean/Hire.hbm.xml</value>
+                <value>pers/hy/public_rooms/bean/RentHire.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
