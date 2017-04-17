@@ -10,7 +10,7 @@
 <script type="text/javascript">
 var exist="${requestScope.exist}"
 if(exist=="exist"){
-	alert("公用房已分配/租赁！");
+	alert("公用房不存在或已分配/租赁！");
 }
 </script>
 

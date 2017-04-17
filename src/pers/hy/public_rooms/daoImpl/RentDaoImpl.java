@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pers.hy.public_rooms.bean.Hire;
 import pers.hy.public_rooms.bean.Rent;
 import pers.hy.public_rooms.bean.RentLogs;
+import pers.hy.public_rooms.bean.Room;
 import pers.hy.public_rooms.dao.RentDao;
 import pers.hy.public_rooms.form.RentAddForm;
 import pers.hy.public_rooms.form.RentLogsForm;
@@ -112,71 +113,79 @@ public class RentDaoImpl implements RentDao {
 	
 	
 	public Rent addRent(RentAddForm rentAddForm){
-		Rent rent=(Rent)getHibernateTemplate().get(Rent.class, rentAddForm.getRoomId());
-		Hire hire=(Hire)getHibernateTemplate().get(Hire.class, rentAddForm.getRoomId());
-		if(rent==null){	
-			Rent r=new Rent();
-			r.setRoomId(rentAddForm.getRoomId());
-			r.setRoomName(rentAddForm.getRoomName());
+		Room room=(Room)getHibernateTemplate().get(Room.class, rentAddForm.getRoomId());
+		
+		if(room==null){
+			return null;
+		}else{
 			
-			if(rentAddForm.getType().equals("0")){
-				r.setType("分配");
-			}
-			
-			if(rentAddForm.getType().equals("1")){
-				r.setType("租赁");
-			}
-			
-			r.setRenter(rentAddForm.getRenter());
-			r.setRenterName(rentAddForm.getRenterName());
-			r.setRenterId(rentAddForm.getRenterId());
-			r.setRenterPhone(rentAddForm.getRenterPhone());
-			r.setRentOther(rentAddForm.getOther());
-			
-			if(rentAddForm.getType().equals("0")){
-				r.setRentDay(null);
-				r.setRentHire(null);
-				r.setRentHires(null);
-				try{
-					String dateString=rentAddForm.getStartDate();
-					SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
-					Date startDate=ssdf.parse(dateString);
-					Date endDate=ssdf.parse(dateString);
-					r.setRentStartDate(startDate);
-					r.setRentEndDate(endDate);
-					
-				}catch(Exception e){}
-			
-			}
-			
-			if(rentAddForm.getType().equals("1")){
-				int d=1;
-				if(rentAddForm.getDay().equals("")){
-					r.setRentDay("1");
-				}else{
-					r.setRentDay(rentAddForm.getDay());
-					d=Integer.parseInt(rentAddForm.getDay());
+			Rent rent=(Rent)getHibernateTemplate().get(Rent.class, rentAddForm.getRoomId());
+			Hire hire=(Hire)getHibernateTemplate().get(Hire.class, rentAddForm.getRoomId());
+			if(rent==null){	
+				Rent r=new Rent();
+				r.setRoomId(rentAddForm.getRoomId());
+				r.setRoomName(rentAddForm.getRoomName());
+				
+				if(rentAddForm.getType().equals("0")){
+					r.setType("分配");
 				}
 				
-				try{
-					String startDateString=rentAddForm.getStartDate();
-					SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
-					Date startDate=ssdf.parse(startDateString);
-					Date endDate=new Date(startDate.getTime()+(long)d*24*60*60*1000);
-					r.setRentStartDate(startDate);
-					r.setRentEndDate(endDate);
-					
-				}catch(Exception e){}
+				if(rentAddForm.getType().equals("1")){
+					r.setType("租赁");
+				}
 				
-				r.setRentHires(String.valueOf(Integer.parseInt(hire.getHire())*d));
-				r.setRentHire(hire.getHire());
+				r.setRenter(rentAddForm.getRenter());
+				r.setRenterName(rentAddForm.getRenterName());
+				r.setRenterId(rentAddForm.getRenterId());
+				r.setRenterPhone(rentAddForm.getRenterPhone());
+				r.setRentOther(rentAddForm.getOther());
+				
+				if(rentAddForm.getType().equals("0")){
+					r.setRentDay(null);
+					r.setRentHire(null);
+					r.setRentHires(null);
+					try{
+						String dateString=rentAddForm.getStartDate();
+						SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
+						Date startDate=ssdf.parse(dateString);
+						Date endDate=ssdf.parse(dateString);
+						r.setRentStartDate(startDate);
+						r.setRentEndDate(endDate);
+						
+					}catch(Exception e){}
+				
+				}
+				
+				if(rentAddForm.getType().equals("1")){
+					int d=1;
+					if(rentAddForm.getDay().equals("")){
+						r.setRentDay("1");
+					}else{
+						r.setRentDay(rentAddForm.getDay());
+						d=Integer.parseInt(rentAddForm.getDay());
+					}
+					
+					try{
+						String startDateString=rentAddForm.getStartDate();
+						SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
+						Date startDate=ssdf.parse(startDateString);
+						Date endDate=new Date(startDate.getTime()+(long)d*24*60*60*1000);
+						r.setRentStartDate(startDate);
+						r.setRentEndDate(endDate);
+						
+					}catch(Exception e){}
+					
+					r.setRentHires(String.valueOf(Integer.parseInt(hire.getHire())*d));
+					r.setRentHire(hire.getHire());
+				}
+				
+				getHibernateTemplate().save(r);
+				return r;
+			}else{
+				return null;
 			}
-			
-			getHibernateTemplate().save(r);
-			return r;
-		}else{
-			return null;
 		}
+		
 	}
 	
 	

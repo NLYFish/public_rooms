@@ -19,6 +19,7 @@
         </action>
     </package>
      
+     
     <package name="admin" namespace="/" extends="struts-default">
         <action name="admin" class="pers.hy.public_rooms.action.IndexAction">
             <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
@@ -26,7 +27,10 @@
             <result name="login">/WEB-INF/login.jsp</result>
             <result name="input">index.jsp</result>
         </action>
-        
+    </package>
+    
+    
+     <package name="userManage" namespace="/" extends="struts-default">
         <action name="userManage" class="pers.hy.public_rooms.action.UserManageAction" method="getUserList">
             <result name="login">/WEB-INF/login.jsp</result>
             <result name="userIndex">/WEB-INF/user/userIndex.jsp</result>
@@ -44,7 +48,10 @@
             <result name="userManage" type="redirect">/userManage</result>
             <result name="input">index.jsp</result>
         </action> 
-        
+     </package>
+    
+    
+    <package name="roomManage" namespace="/" extends="struts-default">
         <action name="roomManage" class="pers.hy.public_rooms.action.RoomManageAction" method="getRoomList">
             <result name="roomManage">/WEB-INF/admin/roomManage/roomManage.jsp</result>
             <result name="login">/WEB-INF/login.jsp</result>
@@ -76,10 +83,6 @@
     </package>
     
     
-    
-    
-    
-    
     <package name="user" namespace="/" extends="struts-default">
         <action name="user" class="pers.hy.public_rooms.action.IndexAction">
             <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
@@ -87,7 +90,10 @@
             <result name="login">/WEB-INF/login.jsp</result>
             <result name="input">index.jsp</result>
         </action>
-        
+    </package>
+  
+  
+    <package name="rentManage" namespace="/" extends="struts-default">
         <action name="rentManage" class="pers.hy.public_rooms.action.RentManageAction" method="getRentList">
             <result name="rentManage">/WEB-INF/user/rentManage/rentManage.jsp</result>
             <result name="login">/WEB-INF/login.jsp</result>
@@ -100,8 +106,7 @@
             <result name="rentManage" type="redirect">/rentManage</result>
             <result name="input">index.jsp</result>
         </action>
-        
-        
+     
         <action name="updateRentPage" class="pers.hy.public_rooms.action.RentManageAction" method="updateRentPage">
             <result name="rentUpdate">/WEB-INF/user/rentManage/rentUpdate.jsp</result>
             <result name="rentManage" type="chain">rentManage</result>
@@ -113,12 +118,10 @@
             <result name="input">index.jsp</result>
         </action>
         
-     
         <action name="deleteRent" class="pers.hy.public_rooms.action.RentManageAction" method="deleteRent">
             <result name="rentManage" type="redirect">/rentManage</result> 
             <result name="input">index.jsp</result>
         </action>
-        
         
         <action name="getRentExpire" class="pers.hy.public_rooms.action.RentManageAction" method="getRentExpire">
             <result name="rentManage">/WEB-INF/user/rentManage/rentManage.jsp</result>
@@ -133,7 +136,8 @@
         <action name="rentLogs" class="pers.hy.public_rooms.action.RentManageAction" method="getRentLogs">
             <result name="rentLogs">/WEB-INF/user/rentManage/rentLogs.jsp</result>
             <result name="rentManage" type="redirect">/rentManage</result>
-        </action>      
-        
+        </action>     
+         
     </package>
+    
 </struts>

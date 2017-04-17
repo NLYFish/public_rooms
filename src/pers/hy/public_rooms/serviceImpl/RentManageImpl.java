@@ -53,7 +53,6 @@ public class RentManageImpl implements RentManage {
 					||rentAddForm.getRenterPhone().equals("")){
 					return "rentAdd";
 				}else{
-					System.out.println(rentAddForm.getType());
 					Rent rent=rentDao.addRent(rentAddForm);
 					if(rent==null){
 						ActionContext ctx=ActionContext.getContext();
