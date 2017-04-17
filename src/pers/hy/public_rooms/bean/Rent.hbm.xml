@@ -9,11 +9,15 @@
             <generator class="assigned"/>  
         </id>   
         <property name="roomName" column="ROOM_NAME"/>  
+        <property name="type" column="TYPE"/>
+        <property name="renter" column="RENTER"/>
         <property name="renterName" column="RENTER_NAME"/>
         <property name="renterId" column="RENTER_ID"/>   
         <property name="renterPhone" column="RENTER_PHONE"/> 
         <property name="rentStartDate" column="RENT_START_DATE"/>
         <property name="rentEndDate" column="RENT_END_DATE"/> 
+        <property name="rentDay" column="RENT_DAY"/> 
+        <property name="rentHires" column="RENT_HIRES"/>   
         <property name="rentHire" column="RENT_HIRE"/>    
         <property name="rentOther" column="RENT_OTHER"/>
     </class>  

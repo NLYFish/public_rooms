@@ -5,23 +5,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>租赁修改</title>
+<title>分配/租赁修改</title>
 </head>
 
 <body>
 
-<h1>修改租赁</h1>
+<h1>修改分配/租赁</h1>
 
 <s:form name="rentUpdateForm" id="rentUpdateForm" action="updateRent" method="post">
 房号：<s:textfield name="rentUpdateForm.roomId" value="%{#updateRent.roomId}" readonly="true"/><br/>
 房名：<s:textfield name="rentUpdateForm.roomName" value="%{#updateRent.roomName}" /><br/>
-姓名：<s:textfield name="rentUpdateForm.renterName" value="%{#updateRent.renterName}"/><br/>
-身份证：<s:textfield name="rentUpdateForm.renterId" value="%{#updateRent.renterId}"/><br/>
+类型：<s:select name="rentUpdateForm.type" list="#{'0':'分配','1':'租赁'}"  headerValue="%{#updateRent.type}"/><br/>
+部门：<s:textfield name="rentUpdateForm.renter" value="%{#updateRent.renter}" /><br/>
+负责人：<s:textfield name="rentUpdateForm.renterName" value="%{#updateRent.renterName}"/><br/>
+身份证/职工号：<s:textfield name="rentUpdateForm.renterId" value="%{#updateRent.renterId}"/><br/>
 电话：<s:textfield name="rentUpdateForm.renterPhone" value="%{#updateRent.renterPhone}"/><br/>
-开始日期：<s:textfield name="rentUpdateForm.startDate" value="%{#updateRent.startDate}"/><br/>
-结束日期：<s:textfield name="rentUpdateForm.endDate" value="%{#updateRent.endDate}"/><br/>
-租金：<s:textfield name="rentUpdateForm.hire" value="%{#updateRent.hire}"/><br/>
-说明：<s:textfield name="rentUpdateForm.other" value="%{#updateRent.hire}"/><br/>
+日期：<s:textfield name="rentUpdateForm.startDate" value="%{#updateRent.startDate}"/><br/>
+天数：<s:textfield name="rentUpdateForm.day" value="%{#updateRent.day}"/><br/>
+说明：<s:textfield name="rentUpdateForm.other" value="%{#updateRent.other}"/><br/>
 <s:submit value="修改"/>
 </s:form>
 

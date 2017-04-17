@@ -27,7 +27,7 @@ public class LoginImpl implements Login {
 		String sessionResult=HttpSessionFactory.getHttpSession("type");
 		
 		//return "loginPage"
-		if(sessionResult.equals("null")){
+		if(sessionResult==null){
 			if(loginForm.getType().equals("")||loginForm.getId().equals("")||loginForm.getPassword().equals("")){
 				return "login";
 			}else{

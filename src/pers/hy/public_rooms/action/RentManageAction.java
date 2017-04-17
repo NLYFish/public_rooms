@@ -91,7 +91,6 @@ public class RentManageAction {
 	
 	public String updateRent(){
 		if(rentUpdateForm==null){
-			System.out.println("not");
 			return "rentManage";
 		}else{
 			return rentManage.updateRent(rentUpdateForm);

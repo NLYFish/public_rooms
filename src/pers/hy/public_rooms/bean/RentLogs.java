@@ -7,11 +7,15 @@ public class RentLogs {
 	private int no;
 	private String roomId;
 	private String roomName;
+	private String type;
+	private String renter;
 	private String renterName;
 	private String renterId;
 	private String renterPhone;
 	private Date rentStartDate;
 	private Date rentEndDate;
+	private String rentDay;
+	private String rentHires;
 	private String rentHire;
 	private String rentOther;
 	
@@ -22,6 +26,23 @@ public class RentLogs {
 	public int getNo(){
 		return this.no;
 	}
+	
+	public void setType(String type){
+		this.type=type;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setRenter(String renter){
+		this.renter=renter;
+	}
+	
+	public String getRenter(){
+		return this.renter;
+	}
+	
 	
 	public void setRoomName(String roomName){
 		this.roomName=roomName;
@@ -80,6 +101,14 @@ public class RentLogs {
 		return this.rentEndDate;
 	}
 	
+	public void setRentHires(String rentHires){
+		this.rentHires=rentHires;
+	}
+	
+	public String getRentHires(){
+		return this.rentHires;
+	}
+	
 	public void setRentHire(String rentHire){
 		this.rentHire=rentHire;
 	}
@@ -94,6 +123,14 @@ public class RentLogs {
 	
 	public String getRentOther(){
 		return this.rentOther;
+	}
+	
+	public void setRentDay(String rentDay){
+		this.rentDay=rentDay;
+	}
+	
+	public String getRentDay(){
+		return this.rentDay;
 	}
 	
 }

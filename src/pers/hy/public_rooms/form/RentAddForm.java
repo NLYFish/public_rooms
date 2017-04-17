@@ -4,26 +4,45 @@ public class RentAddForm {
 
 	private String roomId;
 	private String roomName;
+	private String type;
+	private String renter;
 	private String renterName;
 	private String renterId;
 	private String renterPhone;
 	private String startDate;
-	private String endDate;
-	private String hire;
+	private String day;
 	private String other;
 	
 	public RentAddForm(){
 		this.roomId="";
 		this.roomName="";
+		this.type="";
+		this.renter="";
 		this.renterName="";
 		this.renterId="";
 		this.renterPhone="";
 		this.startDate=""; 
-		this.endDate="";
-		this.hire="";
+		this.day="";
 		this.other="";
 		
 	}
+	
+	public void setType(String type){
+		this.type=type;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setRenter(String renter){
+		this.renter=renter;
+	}
+	
+	public String getRenter(){
+		return this.renter;
+	}
+	
 	
 	public void setRoomName(String roomName){
 		this.roomName=roomName;
@@ -73,20 +92,12 @@ public class RentAddForm {
 		return this.startDate;
 	}
 	
-	public void setEndDate(String endDate){
-		this.endDate=endDate;
+	public void setDay(String day){
+		this.day=day;
 	}
 	
-	public String getEndDate(){
-		return this.endDate;
-	}
-	
-	public void setHire(String hire){
-		this.hire=hire;
-	}
-	
-	public String getHire(){
-		return this.hire;
+	public String getDay(){
+		return this.day;
 	}
 	
 	public void setOther(String other){

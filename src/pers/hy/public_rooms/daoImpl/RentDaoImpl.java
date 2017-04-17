@@ -6,6 +6,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import pers.hy.public_rooms.bean.Hire;
 import pers.hy.public_rooms.bean.Rent;
 import pers.hy.public_rooms.bean.RentLogs;
 import pers.hy.public_rooms.dao.RentDao;
@@ -58,6 +59,34 @@ public class RentDaoImpl implements RentDao {
 			}
 		}
 		
+		if (!rentQueryForm.getType().equals("")) {
+			String type="";
+			if(rentQueryForm.getType().equals("0")){
+				type="分配";
+			}
+			
+			if(rentQueryForm.getType().equals("1")){
+				type="租赁";
+			}
+			
+			if(b==true){
+			    sql =sql+"where TYPE="+"'"+type+"'";
+			    b=false;
+			}else{
+				sql =sql+"and TYPE="+"'"+type+"'";
+			}
+		}
+		
+		
+		if (!rentQueryForm.getRenter().equals("")) {
+			if(b==true){
+			    sql =sql+"where RENTER="+"'"+rentQueryForm.getRenter()+"'";
+			    b=false;
+			}else{
+				sql =sql+"and RENTER="+"'"+rentQueryForm.getRenter()+"'";
+			}
+		}
+		
 		if (!rentQueryForm.getRenterName().equals("")) {
 			if(b==true){
 			    sql =sql+"where RENTER_NAME="+"'"+rentQueryForm.getRenterName()+"'";
@@ -84,27 +113,65 @@ public class RentDaoImpl implements RentDao {
 	
 	public Rent addRent(RentAddForm rentAddForm){
 		Rent rent=(Rent)getHibernateTemplate().get(Rent.class, rentAddForm.getRoomId());
+		Hire hire=(Hire)getHibernateTemplate().get(Hire.class, rentAddForm.getRoomId());
 		if(rent==null){	
 			Rent r=new Rent();
 			r.setRoomId(rentAddForm.getRoomId());
 			r.setRoomName(rentAddForm.getRoomName());
+			
+			if(rentAddForm.getType().equals("0")){
+				r.setType("分配");
+			}
+			
+			if(rentAddForm.getType().equals("1")){
+				r.setType("租赁");
+			}
+			
+			r.setRenter(rentAddForm.getRenter());
 			r.setRenterName(rentAddForm.getRenterName());
 			r.setRenterId(rentAddForm.getRenterId());
 			r.setRenterPhone(rentAddForm.getRenterPhone());
-			
-			try{
-				String startDateString=rentAddForm.getStartDate();
-				String endDateString=rentAddForm.getEndDate();
-				SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
-				SimpleDateFormat esdf=new SimpleDateFormat("yyyy-MM-dd");
-				Date startDate=ssdf.parse(startDateString);
-				Date endDate=esdf.parse(endDateString);
-				r.setRentStartDate(startDate);
-				r.setRentEndDate(endDate);
-			}catch(Exception e){}
-			
-			r.setRentHire(rentAddForm.getHire());
 			r.setRentOther(rentAddForm.getOther());
+			
+			if(rentAddForm.getType().equals("0")){
+				r.setRentDay(null);
+				r.setRentHire(null);
+				r.setRentHires(null);
+				try{
+					String dateString=rentAddForm.getStartDate();
+					SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
+					Date startDate=ssdf.parse(dateString);
+					Date endDate=ssdf.parse(dateString);
+					r.setRentStartDate(startDate);
+					r.setRentEndDate(endDate);
+					
+				}catch(Exception e){}
+			
+			}
+			
+			if(rentAddForm.getType().equals("1")){
+				int d=1;
+				if(rentAddForm.getDay().equals("")){
+					r.setRentDay("1");
+				}else{
+					r.setRentDay(rentAddForm.getDay());
+					d=Integer.parseInt(rentAddForm.getDay());
+				}
+				
+				try{
+					String startDateString=rentAddForm.getStartDate();
+					SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
+					Date startDate=ssdf.parse(startDateString);
+					Date endDate=new Date(startDate.getTime()+(long)d*24*60*60*1000);
+					r.setRentStartDate(startDate);
+					r.setRentEndDate(endDate);
+					
+				}catch(Exception e){}
+				
+				r.setRentHires(String.valueOf(Integer.parseInt(hire.getHire())*d));
+				r.setRentHire(hire.getHire());
+			}
+			
 			getHibernateTemplate().save(r);
 			return r;
 		}else{
@@ -125,28 +192,68 @@ public class RentDaoImpl implements RentDao {
 	
 	public void updateRent(RentUpdateForm rentUpdateForm){
 					
-		Rent rent=(Rent)getHibernateTemplate().get(Rent.class, rentUpdateForm.getRoomId());
-		rent.setRoomName(rentUpdateForm.getRoomName());
-		rent.setRenterName(rentUpdateForm.getRenterName());
-		rent.setRenterId(rentUpdateForm.getRenterId());
-		rent.setRenterPhone(rentUpdateForm.getRenterPhone());
+		Rent r=(Rent)getHibernateTemplate().get(Rent.class, rentUpdateForm.getRoomId());
+		Hire hire=(Hire)getHibernateTemplate().get(Hire.class, rentUpdateForm.getRoomId());
 		
-		try{
-			String startDateString=rentUpdateForm.getStartDate();
-			String endDateString=rentUpdateForm.getEndDate();
-			SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
-			SimpleDateFormat esdf=new SimpleDateFormat("yyyy-MM-dd");
-			Date startDate=ssdf.parse(startDateString);
-			Date endDate=esdf.parse(endDateString);
-			rent.setRentStartDate(startDate);
-			rent.setRentEndDate(endDate);
-		}catch(Exception e){}
-		
-		rent.setRentHire(rentUpdateForm.getHire());
-		rent.setRentOther(rentUpdateForm.getOther());
-		
-		getHibernateTemplate().update(rent);
+			r.setRoomId(rentUpdateForm.getRoomId());
+			r.setRoomName(rentUpdateForm.getRoomName());
+			
+			if(rentUpdateForm.getType().equals("0")){
+				r.setType("分配");
+			}
+			
+			if(rentUpdateForm.getType().equals("1")){
+				r.setType("租赁");
+			}
+			
+			r.setRenter(rentUpdateForm.getRenter());
+			r.setRenterName(rentUpdateForm.getRenterName());
+			r.setRenterId(rentUpdateForm.getRenterId());
+			r.setRenterPhone(rentUpdateForm.getRenterPhone());
+			r.setRentOther(rentUpdateForm.getOther());
+			
+			if(rentUpdateForm.getType().equals("0")){
+				r.setRentDay(null);
+				r.setRentHire(null);
+				r.setRentHires(null);
+				try{
+					String dateString=rentUpdateForm.getStartDate();
+					SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
+					Date startDate=ssdf.parse(dateString);
+					Date endDate=ssdf.parse(dateString);
+					r.setRentStartDate(startDate);
+					r.setRentEndDate(endDate);
+					
+				}catch(Exception e){}
+			
+			}
+			
+			if(rentUpdateForm.getType().equals("1")){
+				int d=1;
+				if(rentUpdateForm.getDay().equals("")){
+					r.setRentDay("1");
+				}else{
+					r.setRentDay(rentUpdateForm.getDay());
+					d=Integer.parseInt(rentUpdateForm.getDay());
+				}
+				
+				try{
+					String startDateString=rentUpdateForm.getStartDate();
+					SimpleDateFormat ssdf=new SimpleDateFormat("yyyy-MM-dd");
+					Date startDate=ssdf.parse(startDateString);
+					Date endDate=new Date(startDate.getTime()+(long)d*24*60*60*1000);
+					r.setRentStartDate(startDate);
+					r.setRentEndDate(endDate);
+					
+				}catch(Exception e){}
+				
+				r.setRentHires(String.valueOf(Integer.parseInt(hire.getHire())*d));
+				r.setRentHire(hire.getHire());
+			}
+
+		getHibernateTemplate().update(r);
 	}
+	
 	
 	
 	public void deleteRent(String[] rentSelect){
@@ -170,11 +277,15 @@ public class RentDaoImpl implements RentDao {
 			RentLogs rentLogs=new RentLogs();
 			rentLogs.setRoomId(rent.getRoomId());
 			rentLogs.setRoomName(rent.getRoomName());
+			rentLogs.setType(rent.getType());
+			rentLogs.setRenter(rent.getRenter());
 			rentLogs.setRenterName(rent.getRenterName());
 			rentLogs.setRenterId(rent.getRenterId());
 			rentLogs.setRenterPhone(rent.getRenterPhone());
 			rentLogs.setRentStartDate(rent.getRentStartDate());
 			rentLogs.setRentEndDate(rent.getRentEndDate());
+			rentLogs.setRentDay(rent.getRentDay());
+			rentLogs.setRentHires(rent.getRentHires());
 			rentLogs.setRentHire(rent.getRentHire());
 			rentLogs.setRentOther(rent.getRentOther());
 			
@@ -233,6 +344,35 @@ public class RentDaoImpl implements RentDao {
 				        +"and RENT_END_DATE > "+"'"+rentLogsForm.getRentDate()+"'";
 			}
 		}
+		
+		if (!rentLogsForm.getType().equals("")) {
+			String type="";
+			if(rentLogsForm.getType().equals("0")){
+				type="分配";
+			}
+			
+			if(rentLogsForm.getType().equals("1")){
+				type="租赁";
+			}
+			
+			if(b==true){
+			    sql =sql+"where TYPE="+"'"+type+"'";
+			    b=false;
+			}else{
+				sql =sql+"and TYPE="+"'"+type+"'";
+			}
+		}
+		
+		
+		if (!rentLogsForm.getRenter().equals("")) {
+			if(b==true){
+			    sql =sql+"where RENTER="+"'"+rentLogsForm.getRenter()+"'";
+			    b=false;
+			}else{
+				sql =sql+"and RENTER="+"'"+rentLogsForm.getRenter()+"'";
+			}
+		}
+		
 		
 		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession(); 
 		List<RentLogs> rentLs=session.createSQLQuery(sql).addEntity(RentLogs.class).list();	

@@ -3,6 +3,8 @@ package pers.hy.public_rooms.form;
 public class RentLogsForm {
 	private String roomId;
 	private String roomName;
+	private String type;
+	private String renter;
 	private String renterName;
 	private String renterId;
 	private String rentDate;
@@ -10,11 +12,30 @@ public class RentLogsForm {
 	public RentLogsForm(){
 		this.roomId="";
 		this.roomName="";
+        this.type="";
+        this.renter="";
 		this.renterName="";
 		this.renterId="";
 		this.rentDate="";
 		
 	}
+	
+	public void setType(String type){
+		this.type=type;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setRenter(String renter){
+		this.renter=renter;
+	}
+	
+	public String getRenter(){
+		return this.renter;
+	}
+	
 	
 	public void setRentDate(String rentDate){
 		this.rentDate=rentDate;

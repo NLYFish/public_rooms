@@ -4,16 +4,37 @@ public class RentQueryForm {
 
 	private String roomId;
 	private String roomName;
+	private String type;
+	private String renter;
 	private String renterName;
 	private String renterId;
 	
 	public RentQueryForm(){
 		this.roomId="";
 		this.roomName="";
+		this.type="";
+		this.renter="";
 		this.renterName="";
 		this.renterId="";
 		
 	}
+	
+	public void setType(String type){
+		this.type=type;
+	}
+	
+	public String getType(){
+		return this.type;
+	}
+	
+	public void setRenter(String renter){
+		this.renter=renter;
+	}
+	
+	public String getRenter(){
+		return this.renter;
+	}
+	
 	
 	public void setRoomName(String roomName){
 		this.roomName=roomName;

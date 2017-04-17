@@ -5,29 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>租赁添加</title>
+<title>分配/租赁添加</title>
 
 <script type="text/javascript">
 var exist="${requestScope.exist}"
 if(exist=="exist"){
-	alert("公用房已租赁！");
+	alert("公用房已分配/租赁！");
 }
 </script>
 
 </head>
 <body>
 
-<h1>添加租赁</h1>
+<h1>添加分配/租赁</h1>
 
 <s:form name="rentAddForm" id="rentAddForm" action="addRent" method="post">
 房号：<s:textfield name="rentAddForm.roomId"/><br/>
 房名：<s:textfield name="rentAddForm.roomName"/><br/>
-姓名：<s:textfield name="rentAddForm.renterName"/><br/>
-身份证：<s:textfield name="rentAddForm.renterId"/><br/>
+类型：<s:select name="rentAddForm.type" list="#{'0':'分配','1':'租赁'}" headerValue="分配"/><br/>
+部门：<s:textfield name="rentAddForm.renter"/><br/>
+负责人：<s:textfield name="rentAddForm.renterName"/><br/>
+身份证/职工号：<s:textfield name="rentAddForm.renterId"/><br/>
 电话：<s:textfield name="rentAddForm.renterPhone"/><br/>
-开始日期：<s:textfield name="rentAddForm.startDate" /><br/>
-结束日期：<s:textfield name="rentAddForm.endDate" /><br/>
-租金：<s:textfield name="rentAddForm.hire"/><br/>
+日期：<s:textfield name="rentAddForm.startDate" /><br/>
+天数：<s:textfield name="rentAddForm.day" /><br/>
 说明：<s:textfield name="rentAddForm.other"/><br/>
 <s:submit value="添加"/>
 </s:form>

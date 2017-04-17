@@ -76,6 +76,10 @@
     </package>
     
     
+    
+    
+    
+    
     <package name="user" namespace="/" extends="struts-default">
         <action name="user" class="pers.hy.public_rooms.action.IndexAction">
             <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
@@ -86,38 +90,49 @@
         
         <action name="rentManage" class="pers.hy.public_rooms.action.RentManageAction" method="getRentList">
             <result name="rentManage">/WEB-INF/user/rentManage/rentManage.jsp</result>
+            <result name="login">/WEB-INF/login.jsp</result>
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="input">index.jsp</result>
         </action>
         
         <action name="addRent" class="pers.hy.public_rooms.action.RentManageAction" method="addRent">
             <result name="rentAdd">/WEB-INF/user/rentManage/rentAdd.jsp</result>
             <result name="rentManage" type="redirect">/rentManage</result>
+            <result name="input">index.jsp</result>
         </action>
         
         
         <action name="updateRentPage" class="pers.hy.public_rooms.action.RentManageAction" method="updateRentPage">
             <result name="rentUpdate">/WEB-INF/user/rentManage/rentUpdate.jsp</result>
             <result name="rentManage" type="chain">rentManage</result>
+            <result name="input">index.jsp</result>
         </action>
         
         <action name="updateRent" class="pers.hy.public_rooms.action.RentManageAction" method="updateRent">
             <result name="rentManage" type="redirect">/rentManage</result>
+            <result name="input">index.jsp</result>
         </action>
         
      
         <action name="deleteRent" class="pers.hy.public_rooms.action.RentManageAction" method="deleteRent">
             <result name="rentManage" type="redirect">/rentManage</result> 
+            <result name="input">index.jsp</result>
         </action>
+        
         
         <action name="getRentExpire" class="pers.hy.public_rooms.action.RentManageAction" method="getRentExpire">
             <result name="rentManage">/WEB-INF/user/rentManage/rentManage.jsp</result>
+            <result name="rentManage2" type="redirect">/rentManage</result>
         </action>
         
         <action name="rentExpire" class="pers.hy.public_rooms.action.RentManageAction" method="rentExpire">
             <result name="rentManage" type="redirect">/rentManage</result>
+            <result name="input">index.jsp</result>
         </action>
         
         <action name="rentLogs" class="pers.hy.public_rooms.action.RentManageAction" method="getRentLogs">
             <result name="rentLogs">/WEB-INF/user/rentManage/rentLogs.jsp</result>
+            <result name="rentManage" type="redirect">/rentManage</result>
         </action>      
         
     </package>

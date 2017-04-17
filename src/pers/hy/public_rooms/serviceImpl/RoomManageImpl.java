@@ -56,7 +56,6 @@ public class RoomManageImpl implements RoomManage {
 				}else{
 					return "roomManage";
 				}
-				
 			}
 		}else{
 			return "input";

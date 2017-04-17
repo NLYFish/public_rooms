@@ -7,7 +7,7 @@ public class HttpSessionFactory {
 	public static String getHttpSession(String name) {
 		ActionContext ctx = ActionContext.getContext();
 		if (ctx.getSession().get(name) == null) {
-			return "null";
+			return null;
 		} else {
 			return (String) ctx.getSession().get(name);
 		}
