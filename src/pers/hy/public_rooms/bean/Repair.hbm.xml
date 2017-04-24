@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+       "-//Hibernate/Hibernate Mapping DTD3.0//EN"
+       "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+       
+<hibernate-mapping>  
+    <class name="pers.hy.public_rooms.bean.Repair" table="repair">  
+       <id name="no" column="NO">  
+            <generator class="identity"/>  
+        </id>  
+        <property name="roomId" column="ROOM_ID"/>  
+        <property name="roomName" column="ROOM_NAME"/>  
+        <property name="repairer" column="REPAIRER"/>    
+        <property name="repairerPhone" column="REPAIRER_PHONE"/>
+        <property name="repairHire" column="REPAIR_HIRE"/> 
+        <property name="repairDate" column="REPAIR_DATE"/> 
+        <property name="repairOther" column="REPAIR_OTHER"/>    
+    </class>  
+</hibernate-mapping> 

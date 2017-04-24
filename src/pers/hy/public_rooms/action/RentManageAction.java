@@ -15,6 +15,15 @@ public class RentManageAction {
 	private String rentUpdateId=null;
 	private RentUpdateForm rentUpdateForm=null;
 	private RentLogsForm rentLogsForm=new RentLogsForm();
+	private int[] rentLogsSelect=null;
+	
+	public void setRentLogsSelect(int[] rentLogsSelect){
+		this.rentLogsSelect=rentLogsSelect;
+	}
+	
+	public int[] getRentLogsSelect(){
+		return this.rentLogsSelect;
+	}
 	
 	public void setRentLogsForm(RentLogsForm rentLogsForm){
 		this.rentLogsForm=rentLogsForm;
@@ -120,5 +129,9 @@ public class RentManageAction {
 	
 	public String getRentLogs(){
 		return rentManage.getRentLogs(rentLogsForm);
+	}
+	
+	public String deleteRentLogs(){
+		return rentManage.deleteRentLogs(rentLogsSelect);
 	}
 }

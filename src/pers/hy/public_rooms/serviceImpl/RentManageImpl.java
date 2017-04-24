@@ -199,9 +199,20 @@ public class RentManageImpl implements RentManage {
 		}else{
 			return "input";
 		}
-		
-		
 	}
 	
+	public String deleteRentLogs(int[] rentLogsSelect){
+		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		if(sessionResult==null){
+			return "rentLogs";
+		}else if(sessionResult.equals("0")){
+			return "rentLogs";
+		}else if(sessionResult.equals("1")){
+			rentDao.deleteRentLogs(rentLogsSelect);
+			return "rentLogs";
+		}else{
+			return "input";
+		}
+	}
 	
 }

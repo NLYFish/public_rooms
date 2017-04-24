@@ -16,5 +16,6 @@ public interface RentDao {
 	public Rent updateRentPage(String rentUpdateId);
 	public void updateRent(RentUpdateForm rentUpdateForm);
 	public List getRentLogs(RentLogsForm rentLogsForm);
+	public void deleteRentLogs(int[] rentLogsSelect);
 	
 }

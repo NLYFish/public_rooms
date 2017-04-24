@@ -138,6 +138,32 @@
             <result name="rentManage" type="redirect">/rentManage</result>
         </action>     
          
+        <action name="deleteRentLogs" class="pers.hy.public_rooms.action.RentManageAction" method="deleteRentLogs">
+            <result name="rentLogs" type="redirect">/rentLogs</result>
+            <result name="input">index.jsp</result>
+        </action>
+         
+    </package>
+    
+    
+    <package name="repairManage" namespace="/" extends="struts-default">
+        <action name="repairManage" class="pers.hy.public_rooms.action.RepairManageAction" method="getRepairList">
+            <result name="repairManage">/WEB-INF/user/repairManage/repairManage.jsp</result>
+            <result name="login">/WEB-INF/login.jsp</result>
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        <action name="addRepair" class="pers.hy.public_rooms.action.RepairManageAction" method="addRepair">
+             <result name="repairAdd">/WEB-INF/user/repairManage/repairAdd.jsp</result>
+            <result name="repairManage" type="redirect">/repairManage</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        <action name="deleteRepair" class="pers.hy.public_rooms.action.RepairManageAction" method="deleteRepair">
+            <result name="repairManage" type="redirect">/repairManage</result> 
+            <result name="input">index.jsp</result>
+        </action>
     </package>
     
 </struts>

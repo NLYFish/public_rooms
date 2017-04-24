@@ -15,6 +15,7 @@ public interface RentManage {
 	public String updateRentPage(String rentUpdateId);
 	public String updateRent(RentUpdateForm rentUpdateForm);
 	public String getRentLogs(RentLogsForm rentLogsForm);
+	public String deleteRentLogs(int[] rentLogsSelect);
 	
 	
 }

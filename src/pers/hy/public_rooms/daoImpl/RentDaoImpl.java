@@ -346,11 +346,11 @@ public class RentDaoImpl implements RentDao {
 		
 		if(!rentLogsForm.getRentDate().equals("")){
 			if(b==true){
-				sql=sql+"where RENT_START_DATE < "+"'"+rentLogsForm.getRentDate()+"'"
-			        +"and RENT_END_DATE > "+"'"+rentLogsForm.getRentDate()+"'";
+				sql=sql+"where DATE_FORMAT(RENT_START_DATE,'%Y-%m')<= "+"'"+rentLogsForm.getRentDate()+"'"
+			        +"and DATE_FORMAT(RENT_END_DATE,'%Y-%m') >= "+"'"+rentLogsForm.getRentDate()+"'";
 			}else{
-				sql=sql+"and RENT_START_DATE < "+"'"+rentLogsForm.getRentDate()+"'"
-				        +"and RENT_END_DATE > "+"'"+rentLogsForm.getRentDate()+"'";
+				sql=sql+"and RENT_START_DATE <= "+"'"+rentLogsForm.getRentDate()+"'"
+				        +"and RENT_END_DATE >= "+"'"+rentLogsForm.getRentDate()+"'";
 			}
 		}
 		
@@ -389,5 +389,12 @@ public class RentDaoImpl implements RentDao {
 	}
 	
 	
+	public void deleteRentLogs(int[] rentLogsSelect){
+		for(int i=0;i<rentLogsSelect.length;i++){
+			RentLogs rentls=(RentLogs)getHibernateTemplate().get(RentLogs.class,rentLogsSelect[i]);
+			getHibernateTemplate().delete(rentls);
+	}
+	
 }
 
+}

@@ -23,10 +23,14 @@
 <s:submit value="查询"/>
 </s:form>
 
+<s:form name="rentLogsDeleteForm" id="rentLogsDeleteForm" action="deleteRentLogs" method="post">
+
+<s:submit value="删除"/> 
 
 <table id="rentLogs" border="1 "style="border-collapse:collapse">
 <caption>分配/租赁记录</caption>
 <tr>
+<td></td>
 <td>房号</td>
 <td>房名</td>
 <td>类型</td>
@@ -45,6 +49,7 @@
 <tbody id="tbody">
 <s:iterator value="%{#request.rentLs}"> 
 <tr> 
+<td><input type="checkbox"  name="rentLogsSelect" value="${no}"></td>
 <td><s:property value="%{roomId}"/></td>  
 <td><s:property value="%{roomName}"/></td>
 <td><s:property value="%{type}"/></td>  
@@ -72,6 +77,8 @@
 <span id="spanNext">下一页</span> 
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
+
+</s:form>
 
 </body>
 </html>

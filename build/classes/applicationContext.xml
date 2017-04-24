@@ -25,6 +25,7 @@
                 <value>pers/hy/public_rooms/bean/Rent.hbm.xml</value>
                 <value>pers/hy/public_rooms/bean/RentLogs.hbm.xml</value>
                 <value>pers/hy/public_rooms/bean/RentHire.hbm.xml</value>
+                <value>pers/hy/public_rooms/bean/Repair.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -50,14 +51,6 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-     <bean id="roomDao" class="pers.hy.public_rooms.daoImpl.RoomDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    
-    <bean id="rentDao" class="pers.hy.public_rooms.daoImpl.RentDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    
     <bean id="login" class="pers.hy.public_rooms.serviceImpl.LoginImpl">
         <property name="userDao" ref="userDao"/>
         <property name="adminDao" ref="adminDao"/>
@@ -75,6 +68,11 @@
         <property name="userManage" ref="userManage"/>
     </bean>
     
+    
+     <bean id="roomDao" class="pers.hy.public_rooms.daoImpl.RoomDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
     <bean id="roomManage" class="pers.hy.public_rooms.serviceImpl.RoomManageImpl">
         <property name="roomDao" ref="roomDao"/>
     </bean>
@@ -83,11 +81,29 @@
         <property name="roomManage" ref="roomManage"/>
     </bean>
     
+    
+    <bean id="rentDao" class="pers.hy.public_rooms.daoImpl.RentDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
     <bean id="rentManage" class="pers.hy.public_rooms.serviceImpl.RentManageImpl">
         <property name="rentDao" ref="rentDao"/>
     </bean>
     
     <bean id="rentManageAction" class="pers.hy.public_rooms.action.RentManageAction">
         <property name="rentManage" ref="rentManage"/>  
+    </bean>
+    
+    
+    <bean id="repairDao" class="pers.hy.public_rooms.daoImpl.RepairDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="repairManage" class="pers.hy.public_rooms.serviceImpl.RepairManageImpl">
+        <property name="repairDao" ref="repairDao"/>
+    </bean>
+    
+    <bean id="repairManageAction" class="pers.hy.public_rooms.action.RepairManageAction">
+        <property name="repairManage" ref="repairManage"/>
     </bean>
 </beans>
