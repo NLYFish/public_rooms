@@ -53,6 +53,7 @@ if(notExist=="notExist"){
 <td>面积</td>
 <td>地址</td>
 <td>说明</td>
+<td>租金</td>
 </tr>
 
 <tbody id="tbody">
@@ -66,6 +67,7 @@ if(notExist=="notExist"){
 <td><s:property value="%{roomArea}"/></td>  
 <td><s:property value="%{roomAddress}"/></td>
 <td><s:property value="%{roomOther}"/></td>  
+<td><s:property value="%{roomHire}"/></td>
 </tr>
 </s:iterator> 
 </tbody>

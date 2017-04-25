@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pers.hy.public_rooms.bean.Room;
 import pers.hy.public_rooms.dao.RoomDao;
 import pers.hy.public_rooms.form.RoomQueryForm;
+import pers.hy.public_rooms.form.HireQueryForm;
+import pers.hy.public_rooms.form.HireUpdateForm;
 import pers.hy.public_rooms.form.RoomAddForm;
 import pers.hy.public_rooms.form.RoomUpdateForm;
 
@@ -88,6 +90,7 @@ public class RoomDaoImpl implements RoomDao {
 			r.setRoomArea(roomAddForm.getArea());
 			r.setRoomAddress(roomAddForm.getAddress());
 			r.setRoomOther(roomAddForm.getOther());
+			r.setRoomHire(roomAddForm.getHire());
 			getHibernateTemplate().save(r);
 			return r;
 		}else{
@@ -113,6 +116,7 @@ public class RoomDaoImpl implements RoomDao {
 		room.setRoomArea(roomUpdateForm.getArea());
 		room.setRoomAddress(roomUpdateForm.getAddress());
 		room.setRoomOther(roomUpdateForm.getOther());
+		room.setRoomHire(roomUpdateForm.getHire());
 		getHibernateTemplate().update(room);
 	}
 	
@@ -122,6 +126,4 @@ public class RoomDaoImpl implements RoomDao {
 			getHibernateTemplate().delete(room);
 		}
 	}
-	
-	
 }

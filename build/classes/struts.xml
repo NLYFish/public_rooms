@@ -166,4 +166,33 @@
         </action>
     </package>
     
+    <package name="hireManage" namespace="/" extends="struts-default">
+        <action name="hireManage" class="pers.hy.public_rooms.action.HireManageAction" method="getHireList">
+            <result name="hireManage">/WEB-INF/user/hireManage/hireManage.jsp</result>
+            <result name="login">/WEB-INF/login.jsp</result>
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+       
+       <action name="updateHirePage" class="pers.hy.public_rooms.action.HireManageAction" method="updateHirePage">
+            <result name="hireUpdate">/WEB-INF/user/hireManage/hireUpdate.jsp</result>
+            <result name="hireManage" type="chain">hireManage</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        
+        <action name="updateHire" class="pers.hy.public_rooms.action.HireManageAction" method="updateHire">
+            <result name="hireManage" type="redirect">/hireManage</result>
+            <result name="input">index.jsp</result>
+        </action>
+       
+        <action name="hireCount" class="pers.hy.public_rooms.action.HireManageAction" method="getHireCount">
+            <result name="hireCount">/WEB-INF/user/hireManage/hireCount.jsp</result>
+            <result name="login">/WEB-INF/login.jsp</result>
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+    </package>
+    
 </struts>

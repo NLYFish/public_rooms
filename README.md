@@ -5,3 +5,4 @@ userManage finish<br/>
 rentManage finish<br/>
 divideManage finish<br/>
 repairManage finish<br/>
+hireManage finish<br/>

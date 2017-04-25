@@ -106,4 +106,18 @@
     <bean id="repairManageAction" class="pers.hy.public_rooms.action.RepairManageAction">
         <property name="repairManage" ref="repairManage"/>
     </bean>
+    
+    <bean id="hireDao" class="pers.hy.public_rooms.daoImpl.HireDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="hireManage" class="pers.hy.public_rooms.serviceImpl.HireManageImpl"> 
+        <property name="hireDao" ref="hireDao"/>
+    </bean>
+    
+    <bean id="hireManageAction" class="pers.hy.public_rooms.action.HireManageAction"> 
+        <property name="hireManage" ref="hireManage"/>
+    </bean>
+    
+    
 </beans>

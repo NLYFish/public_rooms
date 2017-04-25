@@ -8,6 +8,15 @@ public class Room {
 	private String roomArea;
 	private String roomAddress;
 	private String roomOther;
+	private String roomHire;
+	
+	public void setRoomHire(String roomHire){
+		this.roomHire=roomHire;
+	}
+	
+	public String getRoomHire(){
+		return this.roomHire;
+	}
 	
 	public void setRoomId(String roomId){
 		this.roomId=roomId;

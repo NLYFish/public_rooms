@@ -14,6 +14,7 @@
 <div><a href="exit">退出</a></div>
 <div><a href="rentManage">公用房分配/租赁管理</a></div>
 <div><a href="repairManage">公用房维修管理</a></div>
+<div><a href="hireCount">公用房财务管理</a></div>
 <div><a href="index.jsp">首页</a></div>
 
 </body>

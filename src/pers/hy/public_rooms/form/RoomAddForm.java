@@ -9,6 +9,7 @@ public class RoomAddForm {
 	private String area;
 	private String address;
 	private String other;
+	private String hire;
 	
 	public RoomAddForm(){
 		this.id="";
@@ -18,6 +19,15 @@ public class RoomAddForm {
 		this.area="";
 		this.address="";
 		this.other="";
+		this.hire="";
+	}
+	
+	public void setHire(String hire){
+		this.hire=hire;
+	}
+	
+	public String getHire(){
+		return this.hire;
 	}
 	
 	public void setId(String id){

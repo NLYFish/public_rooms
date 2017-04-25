@@ -1,32 +1,52 @@
 package pers.hy.public_rooms.bean;
 
-public class Hire {
-	private String roomId;
-	private String roomName;
-	private String hire;
+import java.util.List;
 
-	public void setRoomId(String roomId){
-		this.roomId=roomId;
+public class Hire {
+	private List<RentLogs> rentHires;
+	private List<Repair> repairHires;
+	private String income;
+	private String outcome;
+	private String sum;
+	
+	public void setRentHires(List<RentLogs> rentHires){
+		this.rentHires=rentHires;
+	}
+
+	public List<RentLogs> getRentHires(){
+		return this.rentHires;
 	}
 	
-	public String getRoomId(){
-		return this.roomId;
+	public List<Repair> getRepairHires(){
+		return this.repairHires;
+	}
+
+	public void setRepairHires(List<Repair> repairHires){
+		this.repairHires=repairHires;
 	}
 	
-	public void setRoomName(String roomName){
-		this.roomName=roomName;
+	public void setIncome(String income){
+		this.income=income;
 	}
 	
-	public String getRoomName(){
-		return this.roomName;
+	public String getIncome(){
+		return this.income;
 	}
 	
-	public void setHire(String hire){
-		this.hire=hire;
+	public void setOutcome(String outcome){
+		this.outcome=outcome;
 	}
 	
-	public String getHire(){
-		return this.hire;
+	public String getOutcome(){
+		return this.outcome;
+	}
+	
+	public void setSum(String sum){
+		this.sum=sum;
+	}
+	
+	public String getSum(){
+		return this.sum;
 	}
 	
 }

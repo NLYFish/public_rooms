@@ -18,6 +18,7 @@
 面积：<s:textfield name="roomUpdateForm.area" value="%{#updateRoom.roomArea}"/><br/>
 地址：<s:textfield name="roomUpdateForm.address" value="%{#updateRoom.roomAddress}"/><br/>
 说明：<s:textfield name="roomUpdateForm.other" value="%{#updateRoom.roomOther}"/><br/>
+租金：<s:textfield name="roomUpdateForm.hire" value="%{#updateRoom.roomHire}"/><br/>
 <s:submit value="修改"/>
 </s:form>
 </body>

@@ -13,20 +13,6 @@ public class RentUpdateForm {
 	private String day;
 	private String other;
 	
-	public RentUpdateForm(){
-		this.roomId="";
-		this.roomName="";
-		this.type="";
-		this.renter="";
-		this.renterName="";
-		this.renterId="";
-		this.renterPhone="";
-		this.startDate=""; 
-		this.day="";
-		this.other="";
-		
-	}
-	
 	public void setType(String type){
 		this.type=type;
 	}

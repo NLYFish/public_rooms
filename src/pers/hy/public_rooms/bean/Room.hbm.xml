@@ -14,5 +14,6 @@
         <property name="roomArea" column="ROOM_AREA"/> 
         <property name="roomAddress" column="ROOM_ADDRESS"/> 
         <property name="roomOther" column="ROOM_OTHER"/> 
+        <property name="roomHire" column="ROOM_HIRE"/>
     </class>  
 </hibernate-mapping> 

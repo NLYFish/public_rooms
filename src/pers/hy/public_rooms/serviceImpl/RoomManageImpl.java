@@ -45,7 +45,7 @@ public class RoomManageImpl implements RoomManage {
 			
 			if(roomAddForm.getId().equals("")||roomAddForm.getName().equals("")
 					||roomAddForm.getBuilding().equals("")||roomAddForm.getFloor().equals("")
-					||roomAddForm.getArea().equals("")){
+					||roomAddForm.getArea().equals("")||roomAddForm.getHire().equals("")){
 				return "roomAdd";
 			}else{
 				Room room=roomDao.addRoom(roomAddForm);

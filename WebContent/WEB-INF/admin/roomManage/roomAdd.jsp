@@ -25,6 +25,7 @@ if(exist=="exist"){
 面积：<s:textfield name="roomAddForm.area"/><br/>
 地址：<s:textfield name="roomAddForm.address"/><br/>
 说明：<s:textfield name="roomAddForm.other"/><br/>
+租金：<s:textfield name="roomAddForm.hire"/><br/>
 <s:submit value="添加"/>
 </s:form>
 <div><a href="roomManage">返回</a></div>

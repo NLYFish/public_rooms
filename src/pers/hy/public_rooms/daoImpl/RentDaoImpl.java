@@ -120,7 +120,6 @@ public class RentDaoImpl implements RentDao {
 		}else{
 			
 			Rent rent=(Rent)getHibernateTemplate().get(Rent.class, rentAddForm.getRoomId());
-			RentHire hire=(RentHire)getHibernateTemplate().get(RentHire.class, rentAddForm.getRoomId());
 			if(rent==null){	
 				Rent r=new Rent();
 				r.setRoomId(rentAddForm.getRoomId());
@@ -175,8 +174,8 @@ public class RentDaoImpl implements RentDao {
 						
 					}catch(Exception e){}
 					
-					r.setRentHires(String.valueOf(Integer.parseInt(hire.getHire())*d));
-					r.setRentHire(hire.getHire());
+					r.setRentHires(String.valueOf(Integer.parseInt(room.getRoomHire())*d));
+					r.setRentHire(room.getRoomHire());
 				}
 				
 				getHibernateTemplate().save(r);
