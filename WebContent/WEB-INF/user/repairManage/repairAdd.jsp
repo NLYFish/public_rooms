@@ -21,7 +21,6 @@ if(noExist=="noExist"){
 
 <s:form name="repairAddForm" id="repairAddForm" action="addRepair" method="post">
 房号：<s:textfield name="repairAddForm.roomId"/><br/>
-房名：<s:textfield name="repairAddForm.roomName"/><br/>
 负责人：<s:textfield name="repairAddForm.repairer"/><br/>
 电话：<s:textfield name="repairAddForm.repairerPhone"/><br/>
 费用：<s:textfield name="repairAddForm.repairHire"/><br/>

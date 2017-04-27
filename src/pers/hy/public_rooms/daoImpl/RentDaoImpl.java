@@ -123,7 +123,7 @@ public class RentDaoImpl implements RentDao {
 			if(rent==null){	
 				Rent r=new Rent();
 				r.setRoomId(rentAddForm.getRoomId());
-				r.setRoomName(rentAddForm.getRoomName());
+				r.setRoomName(room.getRoomName());
 				
 				if(rentAddForm.getType().equals("0")){
 					r.setType("分配");

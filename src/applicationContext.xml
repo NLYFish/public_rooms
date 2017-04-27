@@ -119,5 +119,10 @@
         <property name="hireManage" ref="hireManage"/>
     </bean>
     
+    <bean id="informationManage" class="pers.hy.public_rooms.serviceImpl.InformationManageImpl"></bean>
+    
+    <bean id="InformationManageAction" class="pers.hy.public_rooms.action.InformationManageAction"> 
+        <property name="informationManage" ref="informationManage"/>
+    </bean>
     
 </beans>

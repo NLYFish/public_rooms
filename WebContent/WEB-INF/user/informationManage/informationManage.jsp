@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,12 +10,17 @@
 </head>
 <body>
 
-<a href="login">登录</a>
-<h1>首页</h1>
+<div><a href="user">返回</a></div>
+<h1>通知/公告管理</h1>
+
+<br/>
 
 <div>通知/公告</div>
-<textarea name="information" id="information" style="height:250px;width:250px;" readonly="true"></textarea>
-
+<s:form name="informationForm" id="informationForm" action="setInformation" method="post">
+<s:textarea name="information" id="information" style="height:250px;width:250px;"></s:textarea>
+<s:submit value="更改"/>
+</s:form>
 </body>
 </html>
+
 <script type="text/javascript" src="js/informationScript.js"></script>

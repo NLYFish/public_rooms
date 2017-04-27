@@ -7,6 +7,7 @@
     <constant name="struts.ui.theme" value="simple" />
 
     <package name="login" namespace="/" extends="struts-default">
+    
         <action name="login" class="pers.hy.public_rooms.action.LoginAction">
             <result name="login">/WEB-INF/login.jsp</result>
             <result name="adminIndex" type="redirect">/admin</result>
@@ -193,6 +194,21 @@
             <result name="input">index.jsp</result>
         </action>
         
+    </package>
+    
+    <package name="informationManage" namespace="/" extends="struts-default">
+        <action name="informationManage" class="pers.hy.public_rooms.action.InformationManageAction" method="getInformationManageDo">
+            <result name="informationManage">/WEB-INF/user/informationManage/informationManage.jsp</result>
+            <result name="login">/WEB-INF/login.jsp</result>
+            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
+            <result name="input">index.jsp</result>
+        </action>
+        
+        
+        <action name="setInformation" class="pers.hy.public_rooms.action.InformationManageAction" method="setInformationDo">
+            <result name="informationManage" type="redirect">/informationManage</result>
+            <result name="input">index.jsp</result>
+        </action>
     </package>
     
 </struts>

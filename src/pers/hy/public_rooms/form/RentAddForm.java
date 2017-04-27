@@ -3,7 +3,6 @@ package pers.hy.public_rooms.form;
 public class RentAddForm {
 
 	private String roomId;
-	private String roomName;
 	private String type;
 	private String renter;
 	private String renterName;
@@ -15,7 +14,6 @@ public class RentAddForm {
 	
 	public RentAddForm(){
 		this.roomId="";
-		this.roomName="";
 		this.type="";
 		this.renter="";
 		this.renterName="";
@@ -41,15 +39,6 @@ public class RentAddForm {
 	
 	public String getRenter(){
 		return this.renter;
-	}
-	
-	
-	public void setRoomName(String roomName){
-		this.roomName=roomName;
-	}
-	
-	public String getRoomName(){
-		return this.roomName;
 	}
 	
 	public void setRoomId(String roomId){

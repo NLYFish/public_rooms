@@ -42,7 +42,7 @@ public class RepairManageImpl implements RepairManage {
 		}else if(sessionResult.equals("0")){
 			return "repairManage";
 		}else if(sessionResult.equals("1")){
-			if(repairAddForm.getRoomId().equals("")||repairAddForm.getRoomName().equals("")||repairAddForm.getRepairer().equals("")
+			if(repairAddForm.getRoomId().equals("")||repairAddForm.getRepairer().equals("")
 					||repairAddForm.getRepairerPhone().equals("")||repairAddForm.getRepairDate().equals("")||repairAddForm.getRepairHire().equals("")){
 				return "repairAdd";
 			}else{

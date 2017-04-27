@@ -14,7 +14,7 @@
 
 <s:form name="rentUpdateForm" id="rentUpdateForm" action="updateRent" method="post">
 房号：<s:textfield name="rentUpdateForm.roomId" value="%{#updateRent.roomId}" readonly="true"/><br/>
-房名：<s:textfield name="rentUpdateForm.roomName" value="%{#updateRent.roomName}" /><br/>
+房名：<s:textfield name="rentUpdateForm.roomName" value="%{#updateRent.roomName}" readonly="true" /><br/>
 类型：<s:select name="rentUpdateForm.type" list="#{'0':'分配','1':'租赁'}"  headerValue="%{#updateRent.type}"/><br/>
 部门：<s:textfield name="rentUpdateForm.renter" value="%{#updateRent.renter}" /><br/>
 负责人：<s:textfield name="rentUpdateForm.renterName" value="%{#updateRent.renterName}"/><br/>

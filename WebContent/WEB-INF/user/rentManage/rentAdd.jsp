@@ -21,7 +21,6 @@ if(exist=="exist"){
 
 <s:form name="rentAddForm" id="rentAddForm" action="addRent" method="post">
 房号：<s:textfield name="rentAddForm.roomId"/><br/>
-房名：<s:textfield name="rentAddForm.roomName"/><br/>
 类型：<s:select name="rentAddForm.type" list="#{'0':'分配','1':'租赁'}" headerValue="分配"/><br/>
 部门：<s:textfield name="rentAddForm.renter"/><br/>
 负责人：<s:textfield name="rentAddForm.renterName"/><br/>

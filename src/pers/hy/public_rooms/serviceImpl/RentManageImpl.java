@@ -48,7 +48,7 @@ public class RentManageImpl implements RentManage {
 		}else if(sessionResult.equals("0")){
 			return "rentManage";
 		}else if(sessionResult.equals("1")){
-			if(rentAddForm.getRoomId().equals("")||rentAddForm.getRoomName().equals("")||rentAddForm.getRenterName().equals("")
+			if(rentAddForm.getRoomId().equals("")||rentAddForm.getRenterName().equals("")
 					||rentAddForm.getStartDate().equals("")||rentAddForm.getRenter().equals("")||rentAddForm.getRenterId().equals("")
 					||rentAddForm.getRenterPhone().equals("")){
 					return "rentAdd";

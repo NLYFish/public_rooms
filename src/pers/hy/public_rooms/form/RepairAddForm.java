@@ -3,7 +3,6 @@ package pers.hy.public_rooms.form;
 public class RepairAddForm {
 
 	private String roomId;
-	private String roomName;
 	private String repairer;
 	private String repairerPhone;
 	private String repairHire;
@@ -12,7 +11,6 @@ public class RepairAddForm {
 	
 	public RepairAddForm(){
 		this.roomId="";
-		this.roomName="";
 		this.repairer="";
 		this.repairerPhone="";
 		this.repairHire="";
@@ -42,14 +40,6 @@ public class RepairAddForm {
 	
 	public String getRoomId(){
 		return this.roomId;
-	}
-	
-	public void setRoomName(String roomName){
-		this.roomName=roomName;
-	}
-	
-	public String getRoomName(){
-		return this.roomName;
 	}
 	
 	public void setRepairer(String repairer){

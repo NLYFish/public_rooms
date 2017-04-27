@@ -99,7 +99,7 @@ public class RepairDaoImpl implements RepairDao {
 		}else{
 				Repair r=new Repair();
 				r.setRoomId(repairAddForm.getRoomId());
-				r.setRoomName(repairAddForm.getRoomName());	
+				r.setRoomName(room.getRoomName());	
 				r.setRepairer(repairAddForm.getRepairer());
 				r.setRepairerPhone(repairAddForm.getRepairerPhone());
 				r.setRepairHire(repairAddForm.getRepairHire());
