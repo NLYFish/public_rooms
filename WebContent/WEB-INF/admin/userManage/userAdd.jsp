@@ -14,13 +14,17 @@ if(exist=="exist"){
 </script>
 </head>
 <body>
+<div><a href="userManage">返回</a></div>
 <h1>添加用户</h1>
 
 <s:form name="userAddForm" id="userAddForm" action="addUser" method="post">
 用户名：<s:textfield name="userAddForm.id"/><br/>
-密码：<s:textfield name="userAddForm.password"/>
+职工号：<s:textfield name="userAddForm.no"/><br/>
+姓名：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.name"/><br/>
+电话：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.phone"/><br/>
+密码：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.password" value="123456"/><br/>
 <s:submit value="添加"/>
 </s:form>
-<div><a href="userManage">返回</a></div>
+
 </body>
 </html>

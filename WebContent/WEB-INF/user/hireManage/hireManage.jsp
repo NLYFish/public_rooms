@@ -16,7 +16,7 @@ if(notExist=="notExist"){
 
 </head>
 <body>
-<div><a href="user">返回</a></div>
+<div><a href="hireCount">返回</a></div>
 <h1>租金管理</h1>
 
 <s:form name="hireQueryForm" id="hireQueryForm" action="hireManage" method="get">

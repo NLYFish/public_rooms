@@ -9,7 +9,7 @@ import pers.hy.public_rooms.form.HireQueryForm;
 import pers.hy.public_rooms.form.HireUpdateForm;
 
 public interface HireDao {
-	public List getHireList(HireQueryForm hireQueryForm);
+	public List<Room> getHireList(HireQueryForm hireQueryForm);
 	public Room updateHirePage(String hireUpdateId);
 	public void updateHire(HireUpdateForm hireUpdateForm);
 	public Hire getHireCount(HireCountForm hireCountForm);

@@ -7,7 +7,6 @@ public class RoomAddForm {
 	private String building;
 	private String floor;
 	private String area;
-	private String address;
 	private String other;
 	private String hire;
 	
@@ -17,7 +16,6 @@ public class RoomAddForm {
 		this.building="";
 		this.floor="";
 		this.area="";
-		this.address="";
 		this.other="";
 		this.hire="";
 	}
@@ -69,14 +67,6 @@ public class RoomAddForm {
 	
 	public String getArea(){
 		return this.area;
-	}
-	
-	public void setAddress(String address){
-		this.address=address;
-	}
-	
-	public String getAddress(){
-		return this.address;
 	}
 	
 	public void setOther(String other){

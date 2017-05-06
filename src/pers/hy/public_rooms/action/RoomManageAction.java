@@ -11,7 +11,7 @@ public class RoomManageAction {
 	private String[] roomSelect=null;
 	private RoomAddForm roomAddForm=new RoomAddForm();
 	private String roomUpdateId=null;
-	private RoomUpdateForm roomUpdateForm=null;
+	private RoomUpdateForm roomUpdateForm=new RoomUpdateForm();
 	
 	public void setRoomUpdateForm(RoomUpdateForm roomUpdateForm){
 		this.roomUpdateForm=roomUpdateForm;
@@ -76,11 +76,7 @@ public class RoomManageAction {
 	}
 	
 	public String updateRoom(){
-		if(roomUpdateForm==null){
-			return "roomManage";
-		}else{
-			return roomManage.updateRoom(roomUpdateForm);
-		}
+	    return roomManage.updateRoom(roomUpdateForm);
 	}
 	
 	

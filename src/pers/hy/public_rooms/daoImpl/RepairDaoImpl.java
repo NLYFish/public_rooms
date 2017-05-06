@@ -4,14 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pers.hy.public_rooms.bean.Rent;
-import pers.hy.public_rooms.bean.RentHire;
 import pers.hy.public_rooms.bean.Repair;
 import pers.hy.public_rooms.bean.Room;
 import pers.hy.public_rooms.dao.RepairDao;
@@ -36,56 +36,86 @@ public class RepairDaoImpl implements RepairDao {
 	}
 	
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true) 
-	public List getRepairList(RepairQueryForm repairQueryForm){
+	public List<Repair> getRepairList(RepairQueryForm repairQueryForm){
 		String sql="select * from repair ";
 		boolean b=true;
 		if (!repairQueryForm.getRoomId().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_ID="+"'"+repairQueryForm.getRoomId()+"'";
+			    sql =sql+"where ROOM_ID=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_ID="+"'"+repairQueryForm.getRoomId()+"'";
+				sql =sql+"and ROOM_ID=?";
 			}
 		}
 		
 		if (!repairQueryForm.getRoomName().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_NAME="+"'"+repairQueryForm.getRoomName()+"'";
+			    sql =sql+"where ROOM_NAME=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_NAME="+"'"+repairQueryForm.getRoomName()+"'";
+				sql =sql+"and ROOM_NAME=?";
 			}
 		}
 		
 		if (!repairQueryForm.getRepairer().equals("")) {
 			if(b==true){
-			    sql =sql+"where REPAIRER="+"'"+repairQueryForm.getRepairer()+"'";
+			    sql =sql+"where REPAIRER=?";
 			    b=false;
 			}else{
-				sql =sql+"and REPAIRER="+"'"+repairQueryForm.getRepairer()+"'";
+				sql =sql+"and REPAIRER=?";
 			}
 		}
 		
 		if (!repairQueryForm.getRepairYear().equals("")) {
 			if(b==true){
-			    sql =sql+"where YEAR(REPAIR_DATE)="+"'"+repairQueryForm.getRepairYear()+"'";
+			    sql =sql+"where YEAR(REPAIR_DATE)=?";
 			    b=false;
 			}else{
-				sql =sql+"and YEAR(REPAIR_DATE)="+"'"+repairQueryForm.getRepairYear()+"'";
+				sql =sql+"and YEAR(REPAIR_DATE)=?";
 			}
 		}
 		
 		if (!repairQueryForm.getRepairMonth().equals("")) {
 			if(b==true){
-			    sql =sql+"where MONTH(REPAIR_DATE)="+"'"+repairQueryForm.getRepairMonth()+"'";
+			    sql =sql+"where MONTH(REPAIR_DATE)=?";
 			    b=false;
 			}else{
-				sql =sql+"and MONTH(REPAIR_DATE)="+"'"+repairQueryForm.getRepairMonth()+"'";
+				sql =sql+"and MONTH(REPAIR_DATE)=?";
 			}
 		}
-					
-		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession(); 
-		List<Repair> repairList=session.createSQLQuery(sql).addEntity(Repair.class).list();
+	
+		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query=session.createSQLQuery(sql);
+		
+		int n=0;
+		
+		if (!repairQueryForm.getRoomId().equals("")) {
+			query.setString(n, repairQueryForm.getRoomId());
+			n++;
+		}
+		
+		if (!repairQueryForm.getRoomName().equals("")) {
+			query.setString(n, repairQueryForm.getRoomName());
+			n++;
+		}
+		
+		if (!repairQueryForm.getRepairer().equals("")) {
+			query.setString(n, repairQueryForm.getRepairer());
+			n++;
+		}
+		
+		if (!repairQueryForm.getRepairYear().equals("")) {
+			query.setString(n, repairQueryForm.getRepairYear());
+			n++;
+		}
+		
+		if (!repairQueryForm.getRepairMonth().equals("")) {
+			query.setString(n, repairQueryForm.getRepairMonth());
+			n++;
+		}
+		
+		SQLQuery sqlquery=(SQLQuery)query;	
+		List<Repair> repairList=sqlquery.addEntity(Repair.class).list();
 		return repairList;
 	}
 	

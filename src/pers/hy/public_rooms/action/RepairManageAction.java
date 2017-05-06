@@ -47,6 +47,11 @@ public class RepairManageAction {
 	}
 	
 	public String deleteRepair(){
-		return repairManage.deleteRepair(repairSelect);
+		if(repairSelect==null){
+			return "repairManage";
+		}else{
+			return repairManage.deleteRepair(repairSelect);
+		}
+		
 	}
 }

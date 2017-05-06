@@ -18,17 +18,13 @@
 负责人<s:textfield name="repairQueryForm.repairer" size="10"/>
 年<s:textfield name="repairQueryForm.repairYear" size="5"/>
 月<s:textfield name="repairQueryForm.repairMonth" size="5"/>
-<s:submit value="查询"/>
+<s:submit value="查询"/><input type="button" value="添加" onclick="location.href='addRepair'"/>
 </s:form>
 
 <br/>
 
 <s:form name="repairDeleteForm" id="repairDeleteForm" action="deleteRepair" method="post">
 
-<s:submit value="删除"/> 
-<input type="button" value="添加" onclick="location.href='addRepair'"/>
-
-<br/>
 
 <table id="repairList" border="1 "style="border-collapse:collapse">
 <caption>维修列表</caption>
@@ -66,6 +62,10 @@
 <span id="spanNext">下一页</span> 
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
+
+<br/>
+
+<s:submit value="删除"/> 
 
 </s:form>
 

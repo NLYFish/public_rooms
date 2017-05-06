@@ -19,13 +19,14 @@
 部门<s:textfield name="rentLogsForm.renter" size="10"/>
 姓名<s:textfield name="rentLogsForm.renterName" size="10"/>
 身份证<s:textfield name="rentLogsForm.renterId" size="10"/>
-时间<s:textfield name="rentLogsForm.rentDate" size="10"/>
+年月<s:textfield name="rentLogsForm.rentDate" size="10"/>
 <s:submit value="查询"/>
+
 </s:form>
 
-<s:form name="rentLogsDeleteForm" id="rentLogsDeleteForm" action="deleteRentLogs" method="post">
+<br/>
 
-<s:submit value="删除"/> 
+<s:form name="rentLogsDeleteForm" id="rentLogsDeleteForm" action="deleteRentLogs" method="post">
 
 <table id="rentLogs" border="1 "style="border-collapse:collapse">
 <caption>分配/租赁记录</caption>
@@ -77,6 +78,10 @@
 <span id="spanNext">下一页</span> 
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
+
+<br/>
+
+<s:submit value="删除"/> 
 
 </s:form>
 

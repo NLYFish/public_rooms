@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+<div><a href="rentManage">返回</a></div>
 <h1>修改分配/租赁</h1>
 
 <s:form name="rentUpdateForm" id="rentUpdateForm" action="updateRent" method="post">

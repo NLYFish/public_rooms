@@ -7,6 +7,12 @@ public class HireUpdateForm {
 		private String roomName;
 		private String hire;
 				
+		public HireUpdateForm(){
+			this.roomId="";
+			this.roomName="";
+			this.hire=""; 
+		}
+		
 		public void setHire(String hire){
 			this.hire=hire;
 		}

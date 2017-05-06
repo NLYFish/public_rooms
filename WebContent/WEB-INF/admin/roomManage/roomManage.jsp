@@ -38,9 +38,7 @@ if(notExist=="notExist"){
 
 <s:form name="roomDeleteForm" id="roomDeleteForm" action="deleteRoom" method="post">
 
-<s:submit value="删除"/> 
 
-<br/>
 
 <table id="roomList" border="1 "style="border-collapse:collapse">
 <caption>公用房列表</caption>
@@ -51,9 +49,8 @@ if(notExist=="notExist"){
 <td>建筑</td>
 <td>楼层</td>
 <td>面积</td>
-<td>地址</td>
-<td>说明</td>
 <td>租金</td>
+<td>说明</td>
 </tr>
 
 <tbody id="tbody">
@@ -65,13 +62,14 @@ if(notExist=="notExist"){
 <td><s:property value="%{roomBuilding}"/></td>  
 <td><s:property value="%{roomFloor}"/></td>
 <td><s:property value="%{roomArea}"/></td>  
-<td><s:property value="%{roomAddress}"/></td>
-<td><s:property value="%{roomOther}"/></td>  
 <td><s:property value="%{roomHire}"/></td>
+<td><s:property value="%{roomOther}"/></td>  
 </tr>
 </s:iterator> 
 </tbody>
 </table>
+
+
 
 <br/>
 
@@ -80,6 +78,9 @@ if(notExist=="notExist"){
 <span id="spanNext">下一页</span> 
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
+
+<br/>
+<s:submit value="删除"/> 
 
 </s:form>
 

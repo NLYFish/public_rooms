@@ -7,17 +7,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录</title>
 </head>
-<body>
 
+<script type="text/javascript">
+var loginFailure="${requestScope.loginFailure}"
+if(loginFailure=="loginFailure"){
+	alert("登录失败！");
+}
+</script>
+
+<body>
+<a href="">首页</a>
 <h1>登录</h1>
 
 <s:form name="loginForm" id="loginForm" action="login" method="post">
 用户名：<s:textfield name="loginForm.id"/><br/>
-密码：<s:password name="loginForm.password"/><br/>
-用户类型<s:radio name ="loginForm.type" list="%{#{'0':'管理员','1':'用户'}}" value="1"/>
+密码：&nbsp;&nbsp;&nbsp; <s:password name="loginForm.password"/><br/>
+用户类型：<s:radio name ="loginForm.type" list="%{#{'0':'管理员','1':'用户'}}" value="1"/><br/>
 <s:submit value="登录"/>
 </s:form>
 
-<a href="index.jsp">首页</a>
+
 </body>
 </html>

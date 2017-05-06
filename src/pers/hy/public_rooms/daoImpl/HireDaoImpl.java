@@ -2,6 +2,8 @@ package pers.hy.public_rooms.daoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -36,30 +38,46 @@ public class HireDaoImpl implements HireDao {
 	}
 	
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-	public List getHireList(HireQueryForm hireQueryForm){
+	public List<Room> getHireList(HireQueryForm hireQueryForm){
 		 		
 		String sql="select * from room ";
 		boolean b=true;
 		if (!hireQueryForm.getRoomId().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_ID="+"'"+hireQueryForm.getRoomId()+"'";
+			    sql =sql+"where ROOM_ID=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_ID="+"'"+hireQueryForm.getRoomId()+"'";
+				sql =sql+"and ROOM_ID=?";
 			}
 		}
 		
 		if (!hireQueryForm.getRoomName().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_NAME="+"'"+hireQueryForm.getRoomName()+"'";
+			    sql =sql+"where ROOM_NAME=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_NAME="+"'"+hireQueryForm.getRoomName()+"'";
+				sql =sql+"and ROOM_NAME=?";
 			}
 		}
 		
+		
 		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
-		List<Room> roomList=session.createSQLQuery(sql).addEntity(Room.class).list();
+		Query query=session.createSQLQuery(sql);
+		
+		int n=0;
+		
+		if (!hireQueryForm.getRoomId().equals("")) {
+			query=query.setString(n, hireQueryForm.getRoomId());
+			n++;
+		}
+		
+		if (!hireQueryForm.getRoomName().equals("")) {
+            query=query.setString(n, hireQueryForm.getRoomName());
+            n++;
+		}
+		
+		SQLQuery sqlquery=(SQLQuery)query;	
+		List<Room> roomList=sqlquery.addEntity(Room.class).list();
 		return roomList;
 	}
 	

@@ -1,6 +1,10 @@
 package pers.hy.public_rooms.serviceImpl;
 
 import pers.hy.public_rooms.service.RoomManage;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.opensymphony.xwork2.ActionContext;
 
 import pers.hy.public_rooms.dao.RoomDao;
@@ -19,7 +23,7 @@ public class RoomManageImpl implements RoomManage {
 	
 	public String getRoomList(RoomQueryForm roomQueryForm) {
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "login";
 		}else if(sessionResult.equals("1")){
@@ -36,16 +40,22 @@ public class RoomManageImpl implements RoomManage {
 
 	public String addRoom(RoomAddForm roomAddForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "roomManage";
 		}else if(sessionResult.equals("1")){
 			return "roomManage";
 		}else if(sessionResult.equals("0")){
 			
-			if(roomAddForm.getId().equals("")||roomAddForm.getName().equals("")
-					||roomAddForm.getBuilding().equals("")||roomAddForm.getFloor().equals("")
-					||roomAddForm.getArea().equals("")||roomAddForm.getHire().equals("")){
+			List<String> l=new ArrayList<String>();
+			l.add(roomAddForm.getId());
+			l.add(roomAddForm.getName());
+			l.add(roomAddForm.getBuilding());
+			l.add(roomAddForm.getFloor());
+			l.add(roomAddForm.getArea());
+			l.add(roomAddForm.getHire());
+			
+			if(Factory.getValidation(l)==false){
 				return "roomAdd";
 			}else{
 				Room room=roomDao.addRoom(roomAddForm);
@@ -66,7 +76,7 @@ public class RoomManageImpl implements RoomManage {
 	
 	public String updateRoomPage(String roomUpdateId){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "roomManage";
 		}else if(sessionResult.equals("1")){
@@ -93,15 +103,27 @@ public class RoomManageImpl implements RoomManage {
 	
 	public String updateRoom(RoomUpdateForm roomUpdateForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "roomManage";
 		}else if(sessionResult.equals("1")){
 			return "roomManage";
 		}else if(sessionResult.equals("0")){
 			
-			roomDao.updateRoom(roomUpdateForm);
-			return "roomManage";
+			List<String> l=new ArrayList<String>();
+			l.add(roomUpdateForm.getId());
+			l.add(roomUpdateForm.getName());
+			l.add(roomUpdateForm.getBuilding());
+			l.add(roomUpdateForm.getFloor());
+			l.add(roomUpdateForm.getArea());
+			l.add(roomUpdateForm.getHire());
+			
+			if(Factory.getValidation(l)==false){
+				return "roomManage";
+			}else{
+				roomDao.updateRoom(roomUpdateForm);
+				return "roomManage";
+			}
 			
 		}else{
 			return "input";
@@ -111,7 +133,7 @@ public class RoomManageImpl implements RoomManage {
 	
 	public String deleteRoom(String[] roomSelect){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "roomManage";
 		}else if(sessionResult.equals("1")){

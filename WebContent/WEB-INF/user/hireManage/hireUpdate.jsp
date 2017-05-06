@@ -8,6 +8,7 @@
 <title>租金修改</title>
 </head>
 <body>
+<div><a href="hireManage">返回</a></div>
 <h1>租金修改</h1>
 
 <s:form name="hireUpdateForm" id="hireUpdateForm" action="updateHire" method="post">

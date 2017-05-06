@@ -1,5 +1,8 @@
 package pers.hy.public_rooms.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.opensymphony.xwork2.ActionContext;
 
 import pers.hy.public_rooms.bean.Room;
@@ -19,7 +22,7 @@ public class HireManageImpl implements HireManage {
 	
 	public String getHireList(HireQueryForm hireQueryForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "login";
 		}else if(sessionResult.equals("0")){
@@ -34,7 +37,7 @@ public class HireManageImpl implements HireManage {
 	}
 	
 	public String updateHirePage(String hireUpdateId){
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "hireManage";
 		}else if(sessionResult.equals("0")){
@@ -58,14 +61,24 @@ public class HireManageImpl implements HireManage {
 	
 	public String updateHire(HireUpdateForm hireUpdateForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "hireManage";
 		}else if(sessionResult.equals("0")){
 			return "hireManage";
 		}else if(sessionResult.equals("1")){
-			hireDao.updateHire(hireUpdateForm);
-			return "hireManage";
+			
+			List<String> l=new ArrayList<String>();
+			l.add(hireUpdateForm.getRoomId());
+			l.add(hireUpdateForm.getRoomName());
+			l.add(hireUpdateForm.getHire());
+			
+			if(Factory.getValidation(l)==false){
+				return "hireManage";
+			}else{
+				hireDao.updateHire(hireUpdateForm);
+				return "hireManage";
+			}
 		}else{
 			return "input";
 		}
@@ -73,7 +86,7 @@ public class HireManageImpl implements HireManage {
 
     public String getHireCount(HireCountForm hireCountForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "login";
 		}else if(sessionResult.equals("0")){

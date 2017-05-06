@@ -4,6 +4,7 @@ import pers.hy.public_rooms.form.RentAddForm;
 import pers.hy.public_rooms.form.RentLogsForm;
 import pers.hy.public_rooms.form.RentQueryForm;
 import pers.hy.public_rooms.form.RentUpdateForm;
+import pers.hy.public_rooms.form.RoomQueryForm;
 
 public interface RentManage {
 
@@ -16,6 +17,7 @@ public interface RentManage {
 	public String updateRent(RentUpdateForm rentUpdateForm);
 	public String getRentLogs(RentLogsForm rentLogsForm);
 	public String deleteRentLogs(int[] rentLogsSelect);
+	public String getRoomList(RoomQueryForm roomQueryForm);
 	
 	
 }

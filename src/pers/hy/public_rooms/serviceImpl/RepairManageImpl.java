@@ -1,8 +1,10 @@
 package pers.hy.public_rooms.serviceImpl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.opensymphony.xwork2.ActionContext;
 
-import pers.hy.public_rooms.bean.Rent;
 import pers.hy.public_rooms.bean.Repair;
 import pers.hy.public_rooms.dao.RepairDao;
 import pers.hy.public_rooms.form.RepairAddForm;
@@ -19,7 +21,7 @@ public class RepairManageImpl implements RepairManage {
 	
 	public String getRepairList(RepairQueryForm repairQueryForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "login";
 		}else if(sessionResult.equals("0")){
@@ -36,14 +38,21 @@ public class RepairManageImpl implements RepairManage {
 
 	public String addRepair(RepairAddForm repairAddForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "repairManage";
 		}else if(sessionResult.equals("0")){
 			return "repairManage";
 		}else if(sessionResult.equals("1")){
-			if(repairAddForm.getRoomId().equals("")||repairAddForm.getRepairer().equals("")
-					||repairAddForm.getRepairerPhone().equals("")||repairAddForm.getRepairDate().equals("")||repairAddForm.getRepairHire().equals("")){
+			
+			List<String> l=new ArrayList<String>();
+			l.add(repairAddForm.getRoomId());
+			l.add(repairAddForm.getRepairer());
+			l.add(repairAddForm.getRepairerPhone());
+			l.add(repairAddForm.getRepairDate());
+			l.add(repairAddForm.getRepairHire());
+			
+			if(Factory.getValidation(l)==false){
 				return "repairAdd";
 			}else{
 				Repair repair=repairDao.addRepair(repairAddForm);
@@ -62,7 +71,7 @@ public class RepairManageImpl implements RepairManage {
 	
 	public String deleteRepair(int[] repairSelect){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "repairManage";
 		}else if(sessionResult.equals("0")){

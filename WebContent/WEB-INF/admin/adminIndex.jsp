@@ -14,6 +14,7 @@
 <div><a href="exit">退出</a></div>
 <div><a href="userManage">用户管理</a></div>
 <div><a href="roomManage">公用房管理</a></div>
-<div><a href="index.jsp">首页</a></div>
+<div><a href="">首页</a></div>
+<div><a href="updatePasswordPage">修改密码</a></div>
 </body>
 </html>

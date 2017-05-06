@@ -16,7 +16,7 @@ if(exist=="exist"){
 
 </head>
 <body>
-
+<div><a href="rentManage">返回</a></div>
 <h1>添加分配/租赁</h1>
 
 <s:form name="rentAddForm" id="rentAddForm" action="addRent" method="post">

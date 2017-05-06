@@ -30,4 +30,10 @@ public class AdminDaoImpl implements AdminDao {
 		return admin;
 	}
 
+	public void updatePassword(String id,String newPassword){
+		Admin admin=(Admin)getHibernateTemplate().get(Admin.class,id);
+		admin.setAdminPassword(newPassword);
+		getHibernateTemplate().save(admin);
+	}
+	
 }

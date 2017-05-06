@@ -14,7 +14,7 @@ if(exist=="exist"){
 </script>
 </head>
 <body>
-
+<div><a href="roomManage">返回</a></div>
 <h1>添加用户</h1>
 
 <s:form name="roomAddForm" id="roomAddForm" action="addRoom" method="post">
@@ -23,12 +23,11 @@ if(exist=="exist"){
 建筑：<s:textfield name="roomAddForm.building"/><br/>
 楼层：<s:textfield name="roomAddForm.floor"/><br/>
 面积：<s:textfield name="roomAddForm.area"/><br/>
-地址：<s:textfield name="roomAddForm.address"/><br/>
+租金：<s:textfield name="roomAddForm.hire" value="30"/><br/>
 说明：<s:textfield name="roomAddForm.other"/><br/>
-租金：<s:textfield name="roomAddForm.hire"/><br/>
 <s:submit value="添加"/>
 </s:form>
-<div><a href="roomManage">返回</a></div>
+
 
 </body>
 </html>

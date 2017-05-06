@@ -5,17 +5,27 @@ import pers.hy.public_rooms.form.RentLogsForm;
 import pers.hy.public_rooms.service.RentManage;
 import pers.hy.public_rooms.form.RentQueryForm;
 import pers.hy.public_rooms.form.RentUpdateForm;
+import pers.hy.public_rooms.form.RoomQueryForm;
 
 public class RentManageAction {
 
 	private RentAddForm rentAddForm=new RentAddForm();
 	private RentQueryForm rentQueryForm=new RentQueryForm();
+	private RoomQueryForm roomQueryForm=new RoomQueryForm();
 	private RentManage rentManage;
 	private String[] rentSelect=null;
 	private String rentUpdateId=null;
-	private RentUpdateForm rentUpdateForm=null;
+	private RentUpdateForm rentUpdateForm=new RentUpdateForm();
 	private RentLogsForm rentLogsForm=new RentLogsForm();
 	private int[] rentLogsSelect=null;
+	
+	public void setRoomQueryForm(RoomQueryForm roomQueryForm){
+		this.roomQueryForm=roomQueryForm;
+	}
+	
+	public RoomQueryForm getRoomQueryForm(){
+		return this.roomQueryForm;
+	}
 	
 	public void setRentLogsSelect(int[] rentLogsSelect){
 		this.rentLogsSelect=rentLogsSelect;
@@ -132,6 +142,15 @@ public class RentManageAction {
 	}
 	
 	public String deleteRentLogs(){
-		return rentManage.deleteRentLogs(rentLogsSelect);
+		if(rentLogsSelect==null){
+			return "rentLogs";
+		}else{
+			return rentManage.deleteRentLogs(rentLogsSelect);
+		}
+		
+	}
+	
+	public String getRoomList(){
+		return rentManage.getRoomList(roomQueryForm);
 	}
 }

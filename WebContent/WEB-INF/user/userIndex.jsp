@@ -15,8 +15,10 @@
 <div><a href="rentManage">公用房分配/租赁管理</a></div>
 <div><a href="repairManage">公用房维修管理</a></div>
 <div><a href="hireCount">公用房财务管理</a></div>
-<div><a href="informationManage">公用房通知/公告管理</a></div>
-<div><a href="index.jsp">首页</a></div>
-
+<div><a href="getMessageDo">公用房通知管理</a></div>
+<div><a href="getNoticeDo">公用房公告管理</a></div>
+<div><a href="">首页</a></div>
+<div><a href="updatePasswordPage">修改密码</a></div>
+<div><a href="updateInformationPage">个人信息</a></div>
 </body>
 </html>

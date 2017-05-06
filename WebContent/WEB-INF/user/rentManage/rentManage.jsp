@@ -30,8 +30,9 @@ function rentExpire(){
 </head>
 <body>
 
+<div><a href="uRoomQuery">未使用公用房查询</a></div>
 <div><a href="rentLogs">分配租赁记录</a></div>
-<div><a href="admin">返回</a></div>
+<div><a href="user">返回</a></div>
 <h1>分配/租赁管理</h1>
 
 <s:form name="rentQueryForm" id="rentQueryForm" action="rentManage" method="get">
@@ -55,10 +56,7 @@ function rentExpire(){
 <br/>
 
 <s:form name="rentDeleteForm" id="rentDeleteForm" method="post">
-<input type="button" value="删除" onclick="deleteRent()"/>
-<input type="button" value="到期处理" onclick="rentExpire()"/>
 
-<br/>
 
 <table id="rentList" border="1 "style="border-collapse:collapse">
 <caption>分配/租赁列表</caption>
@@ -108,6 +106,11 @@ function rentExpire(){
 <span id="spanNext">下一页</span> 
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
+
+<br/>
+
+<input type="button" value="删除" onclick="deleteRent()"/>
+<input type="button" value="到期处理" onclick="rentExpire()"/>
 
 </s:form>
 

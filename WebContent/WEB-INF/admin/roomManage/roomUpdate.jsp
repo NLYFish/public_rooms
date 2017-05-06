@@ -8,6 +8,7 @@
 <title>公用房修改</title>
 </head>
 <body>
+<div><a href="roomManage">返回</a></div>
 <h1>公用房修改</h1>
 
 <s:form name="roomUpdateForm" id="roomUpdateForm" action="updateRoom" method="post">
@@ -16,9 +17,8 @@
 建筑：<s:textfield name="roomUpdateForm.building" value="%{#updateRoom.roomBuilding}"/><br/>
 楼层：<s:textfield name="roomUpdateForm.floor" value="%{#updateRoom.roomFloor}"/><br/>
 面积：<s:textfield name="roomUpdateForm.area" value="%{#updateRoom.roomArea}"/><br/>
-地址：<s:textfield name="roomUpdateForm.address" value="%{#updateRoom.roomAddress}"/><br/>
-说明：<s:textfield name="roomUpdateForm.other" value="%{#updateRoom.roomOther}"/><br/>
 租金：<s:textfield name="roomUpdateForm.hire" value="%{#updateRoom.roomHire}"/><br/>
+说明：<s:textfield name="roomUpdateForm.other" value="%{#updateRoom.roomOther}"/><br/>
 <s:submit value="修改"/>
 </s:form>
 </body>

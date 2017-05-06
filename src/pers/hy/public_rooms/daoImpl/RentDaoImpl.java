@@ -1,12 +1,13 @@
 package pers.hy.public_rooms.daoImpl;
 
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pers.hy.public_rooms.bean.RentHire;
 import pers.hy.public_rooms.bean.Rent;
 import pers.hy.public_rooms.bean.RentLogs;
 import pers.hy.public_rooms.bean.Room;
@@ -39,25 +40,78 @@ public class RentDaoImpl implements RentDao {
 	
 	
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true) 
-	public List getRentList(RentQueryForm rentQueryForm){
+	public List<Rent> getRentList(RentQueryForm rentQueryForm){
 		String sql="select * from rent ";
 		boolean b=true;
 		if (!rentQueryForm.getRoomId().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_ID="+"'"+rentQueryForm.getRoomId()+"'";
+			    sql =sql+"where ROOM_ID=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_ID="+"'"+rentQueryForm.getRoomId()+"'";
+				sql =sql+"and ROOM_ID=?";
 			}
 		}
 		
 		if (!rentQueryForm.getRoomName().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_NAME="+"'"+rentQueryForm.getRoomName()+"'";
+			    sql =sql+"where ROOM_NAME=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_NAME="+"'"+rentQueryForm.getRoomName()+"'";
+				sql =sql+"and ROOM_NAME=?";
 			}
+		}
+		
+		if (!rentQueryForm.getType().equals("")) {			
+			if(b==true){
+			    sql =sql+"where TYPE=?";
+			    b=false;
+			}else{
+				sql =sql+"and TYPE=?";
+			}
+		}
+		
+		
+		if (!rentQueryForm.getRenter().equals("")) {
+			if(b==true){
+			    sql =sql+"where RENTER=?";
+			    b=false;
+			}else{
+				sql =sql+"and RENTER=?";
+			}
+		}
+		
+		if (!rentQueryForm.getRenterName().equals("")) {
+			if(b==true){
+			    sql =sql+"where RENTER_NAME=?";
+			    b=false;
+			}else{
+				sql =sql+"and RENTER_NAME=?";
+			}
+		}
+		
+		if (!rentQueryForm.getRenterId().equals("")) {
+			if(b==true){
+			    sql =sql+"where RENTER_ID=?";
+			    b=false;
+			}else{
+				sql =sql+"and RENTER_ID=?";
+			}
+		}
+		
+		
+		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query=session.createSQLQuery(sql);
+		
+		int n=0;
+		
+		if (!rentQueryForm.getRoomId().equals("")) {
+			query.setString(n,rentQueryForm.getRoomId());
+			n++;
+		}
+		
+		if (!rentQueryForm.getRoomName().equals("")) {
+			query.setString(n,rentQueryForm.getRoomName());
+			n++;
 		}
 		
 		if (!rentQueryForm.getType().equals("")) {
@@ -65,49 +119,30 @@ public class RentDaoImpl implements RentDao {
 			if(rentQueryForm.getType().equals("0")){
 				type="分配";
 			}
-			
 			if(rentQueryForm.getType().equals("1")){
 				type="租赁";
 			}
-			
-			if(b==true){
-			    sql =sql+"where TYPE="+"'"+type+"'";
-			    b=false;
-			}else{
-				sql =sql+"and TYPE="+"'"+type+"'";
-			}
+			query.setString(n,type);
+			n++;
 		}
 		
-		
 		if (!rentQueryForm.getRenter().equals("")) {
-			if(b==true){
-			    sql =sql+"where RENTER="+"'"+rentQueryForm.getRenter()+"'";
-			    b=false;
-			}else{
-				sql =sql+"and RENTER="+"'"+rentQueryForm.getRenter()+"'";
-			}
+			query.setString(n,rentQueryForm.getRenter());
+			n++;
 		}
 		
 		if (!rentQueryForm.getRenterName().equals("")) {
-			if(b==true){
-			    sql =sql+"where RENTER_NAME="+"'"+rentQueryForm.getRenterName()+"'";
-			    b=false;
-			}else{
-				sql =sql+"and RENTER_NAME="+"'"+rentQueryForm.getRenterName()+"'";
-			}
+			query.setString(n,rentQueryForm.getRenterName());
+			n++;
 		}
 		
 		if (!rentQueryForm.getRenterId().equals("")) {
-			if(b==true){
-			    sql =sql+"where RENTER_ID="+"'"+rentQueryForm.getRenterId()+"'";
-			    b=false;
-			}else{
-				sql =sql+"and RENTER_ID="+"'"+rentQueryForm.getRenterId()+"'";
-			}
+			query.setString(n,rentQueryForm.getRenterId());
+			n++;
 		}
-			
-		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession(); 
-		List<Rent> rentList=session.createSQLQuery(sql).addEntity(Rent.class).list();
+		
+		SQLQuery sqlquery=(SQLQuery)query;	
+		List<Rent> rentList=sqlquery.addEntity(Rent.class).list();
 		return rentList;
 	}
 	
@@ -201,7 +236,8 @@ public class RentDaoImpl implements RentDao {
 	public void updateRent(RentUpdateForm rentUpdateForm){
 					
 		Rent r=(Rent)getHibernateTemplate().get(Rent.class, rentUpdateForm.getRoomId());
-		RentHire hire=(RentHire)getHibernateTemplate().get(RentHire.class, rentUpdateForm.getRoomId());
+		
+		Room room=(Room)getHibernateTemplate().get(Room.class, rentUpdateForm.getRoomId());
 		
 			r.setRoomId(rentUpdateForm.getRoomId());
 			r.setRoomName(rentUpdateForm.getRoomName());
@@ -255,8 +291,8 @@ public class RentDaoImpl implements RentDao {
 					
 				}catch(Exception e){}
 				
-				r.setRentHires(String.valueOf(Integer.parseInt(hire.getHire())*d));
-				r.setRentHire(hire.getHire());
+				r.setRentHires(String.valueOf(Integer.parseInt(room.getRoomHire())*d));
+				r.setRentHire(room.getRoomHire());
 			}
 
 		getHibernateTemplate().update(r);
@@ -272,7 +308,7 @@ public class RentDaoImpl implements RentDao {
 	}
 	
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true) 
-	public List getRentExpire(){
+	public List<Rent> getRentExpire(){
 		String sql="select * from rent where RENT_END_DATE<NOW()";	
 		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession(); 
 		List<Rent> rentList=session.createSQLQuery(sql).addEntity(Rent.class).list();
@@ -304,55 +340,45 @@ public class RentDaoImpl implements RentDao {
 	
 	
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true) 
-	public List getRentLogs(RentLogsForm rentLogsForm){
+	public List<RentLogs> getRentLogs(RentLogsForm rentLogsForm){
 		String sql="select * from rent_logs ";
 		boolean b=true;
 		if (!rentLogsForm.getRoomId().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_ID="+"'"+rentLogsForm.getRoomId()+"'";
+			    sql =sql+"where ROOM_ID=?";
 			    b=false;
 			}else{ 
-				sql =sql+"and ROOM_ID="+"'"+rentLogsForm.getRoomId()+"'";
+				sql =sql+"and ROOM_ID=?";
 			}
 		}
 		
 		if (!rentLogsForm.getRoomName().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_NAME="+"'"+rentLogsForm.getRoomName()+"'";
+			    sql =sql+"where ROOM_NAME=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_NAME="+"'"+rentLogsForm.getRoomName()+"'";
+				sql =sql+"and ROOM_NAME=?";
 			}
 		}
 		
 		if (!rentLogsForm.getRenterName().equals("")) {
 			if(b==true){
-			    sql =sql+"where RENTER_NAME="+"'"+rentLogsForm.getRenterName()+"'";
+			    sql =sql+"where RENTER_NAME=?";
 			    b=false;
 			}else{
-				sql =sql+"and RENTER_NAME="+"'"+rentLogsForm.getRenterName()+"'";
+				sql =sql+"and RENTER_NAME=?";
 			}
 		}
 		
 		if (!rentLogsForm.getRenterId().equals("")) {
 			if(b==true){
-			    sql =sql+"where RENTER_ID="+"'"+rentLogsForm.getRenterId()+"'";
+			    sql =sql+"where RENTER_ID=?";
 			    b=false;
 			}else{
-				sql =sql+"and RENTER_ID="+"'"+rentLogsForm.getRenterId()+"'";
+				sql =sql+"and RENTER_ID=?";
 			}
 		}
-		
-		if(!rentLogsForm.getRentDate().equals("")){
-			if(b==true){
-				sql=sql+"where DATE_FORMAT(RENT_START_DATE,'%Y-%m')<= "+"'"+rentLogsForm.getRentDate()+"'"
-			        +"and DATE_FORMAT(RENT_END_DATE,'%Y-%m') >= "+"'"+rentLogsForm.getRentDate()+"'";
-			}else{
-				sql=sql+"and RENT_START_DATE <= "+"'"+rentLogsForm.getRentDate()+"'"
-				        +"and RENT_END_DATE >= "+"'"+rentLogsForm.getRentDate()+"'";
-			}
-		}
-		
+				
 		if (!rentLogsForm.getType().equals("")) {
 			String type="";
 			if(rentLogsForm.getType().equals("0")){
@@ -364,26 +390,95 @@ public class RentDaoImpl implements RentDao {
 			}
 			
 			if(b==true){
-			    sql =sql+"where TYPE="+"'"+type+"'";
+			    sql =sql+"where TYPE=?";
 			    b=false;
 			}else{
-				sql =sql+"and TYPE="+"'"+type+"'";
+				sql =sql+"and TYPE=?";
 			}
 		}
 		
 		
 		if (!rentLogsForm.getRenter().equals("")) {
 			if(b==true){
-			    sql =sql+"where RENTER="+"'"+rentLogsForm.getRenter()+"'";
+			    sql =sql+"where RENTER=?";
 			    b=false;
 			}else{
-				sql =sql+"and RENTER="+"'"+rentLogsForm.getRenter()+"'";
+				sql =sql+"and RENTER=?";
 			}
 		}
 		
+		if(!rentLogsForm.getRentDate().equals("")){
+			if(b==true){
+				sql=sql+"where DATE_FORMAT(RENT_START_DATE,'%Y-%m')<=? and DATE_FORMAT(RENT_END_DATE,'%Y-%m') >=?";
+			}else{
+				sql=sql+"and DATE_FORMAT(RENT_START_DATE,'%Y-%m')<=? and DATE_FORMAT(RENT_END_DATE,'%Y-%m') >=?";
+			}
+		}
 		
-		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession(); 
-		List<RentLogs> rentLs=session.createSQLQuery(sql).addEntity(RentLogs.class).list();	
+		/*
+		if(!rentLogsForm.getRentDate().equals("")){
+			if(b==true){
+				sql=sql+"where DATE_FORMAT(RENT_START_DATE,'%Y-%m')<= "+"'"+rentLogsForm.getRentDate()+"'"
+			        +"and DATE_FORMAT(RENT_END_DATE,'%Y-%m') >= "+"'"+rentLogsForm.getRentDate()+"'";
+			}else{
+				sql=sql+"and RENT_START_DATE <= "+"'"+rentLogsForm.getRentDate()+"'"
+				        +"and RENT_END_DATE >= "+"'"+rentLogsForm.getRentDate()+"'";
+			}
+		}
+		*/
+		
+		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query=session.createSQLQuery(sql);
+		
+		int n=0;
+		
+		if (!rentLogsForm.getRoomId().equals("")) {
+			query.setString(n, rentLogsForm.getRoomId());
+			n++;
+		}
+		
+		if (!rentLogsForm.getRoomName().equals("")) {
+			query.setString(n, rentLogsForm.getRoomName());
+			n++;
+		}
+		
+		if (!rentLogsForm.getRenterName().equals("")) {
+			query.setString(n, rentLogsForm.getRenterName());
+			n++;
+		}
+		
+		if (!rentLogsForm.getRenterId().equals("")) {
+			query.setString(n, rentLogsForm.getRenterId());
+			n++;
+		}
+				
+		if (!rentLogsForm.getType().equals("")) {
+			String type="";
+			if(rentLogsForm.getType().equals("0")){
+				type="分配";
+			}
+			
+			if(rentLogsForm.getType().equals("1")){
+				type="租赁";
+			}
+			query.setString(n,type);
+			n++;
+		}
+		
+		if (!rentLogsForm.getRenter().equals("")) {
+			query.setString(n, rentLogsForm.getRenter());
+			n++;
+		}
+		
+		if(!rentLogsForm.getRentDate().equals("")){
+			query.setString(n, rentLogsForm.getRentDate());
+			n++;
+			query.setString(n, rentLogsForm.getRentDate());
+			n++;
+		}
+		
+		SQLQuery sqlquery=(SQLQuery)query;	
+		List<RentLogs> rentLs=sqlquery.addEntity(RentLogs.class).list();	
 		return rentLs;
 	}
 	

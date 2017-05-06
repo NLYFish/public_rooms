@@ -6,7 +6,6 @@ public class Room {
 	private String roomBuilding;
 	private String roomFloor;
 	private String roomArea;
-	private String roomAddress;
 	private String roomOther;
 	private String roomHire;
 	
@@ -57,14 +56,6 @@ public class Room {
 	
 	public String getRoomArea(){
 		return this.roomArea;
-	}
-	
-	public void setRoomAddress(String roomAddress){
-		this.roomAddress=roomAddress;
-	}
-	
-	public String getRoomAddress(){
-		return this.roomAddress;
 	}
 	
 	public void setRoomOther(String roomOther){

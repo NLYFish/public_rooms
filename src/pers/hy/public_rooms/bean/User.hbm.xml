@@ -8,6 +8,9 @@
         <id name="userId" column="USER_ID">  
             <generator class="assigned"/>  
         </id>   
+        <property name="userNo" column="USER_NO"/> 
+        <property name="userName" column="USER_NAME"/> 
+        <property name="userPhone" column="USER_PHONE"/> 
         <property name="userPassword" column="USER_PASSWORD"/>   
     </class>  
 </hibernate-mapping>  

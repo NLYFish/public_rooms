@@ -2,6 +2,8 @@ package pers.hy.public_rooms.daoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -11,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pers.hy.public_rooms.bean.Room;
 import pers.hy.public_rooms.dao.RoomDao;
 import pers.hy.public_rooms.form.RoomQueryForm;
-import pers.hy.public_rooms.form.HireQueryForm;
-import pers.hy.public_rooms.form.HireUpdateForm;
 import pers.hy.public_rooms.form.RoomAddForm;
 import pers.hy.public_rooms.form.RoomUpdateForm;
 
@@ -34,47 +34,72 @@ public class RoomDaoImpl implements RoomDao {
 	}
 	
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-	public List getRoomList(RoomQueryForm roomQueryForm) {
+	public List<Room> getRoomList(RoomQueryForm roomQueryForm) {
 		String sql="select * from room ";
 		boolean b=true;
 		if (!roomQueryForm.getRoomId().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_ID="+"'"+roomQueryForm.getRoomId()+"'";
+			    sql =sql+"where ROOM_ID=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_ID="+"'"+roomQueryForm.getRoomId()+"'";
+				sql =sql+"and ROOM_ID=?";
 			}
 		}
 		
 		if (!roomQueryForm.getRoomName().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_NAME="+"'"+roomQueryForm.getRoomName()+"'";
+			    sql =sql+"where ROOM_NAME=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_NAME="+"'"+roomQueryForm.getRoomName()+"'";
+				sql =sql+"and ROOM_NAME=?";
 			}
 		}
 		
 		if (!roomQueryForm.getRoomBuilding().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_BUILDING="+"'"+roomQueryForm.getRoomBuilding()+"'";
+			    sql =sql+"where ROOM_BUILDING=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_BUILDING="+"'"+roomQueryForm.getRoomBuilding()+"'";
+				sql =sql+"and ROOM_BUILDING=?";
 			}
 		}
 		
 		if (!roomQueryForm.getRoomFloor().equals("")) {
 			if(b==true){
-			    sql =sql+"where ROOM_FLOOR="+"'"+roomQueryForm.getRoomFloor()+"'";
+			    sql =sql+"where ROOM_FLOOR=?";
 			    b=false;
 			}else{
-				sql =sql+"and ROOM_FLOOR="+"'"+roomQueryForm.getRoomFloor()+"'";
+				sql =sql+"and ROOM_FLOOR=?";
 			}
 		}
 		
 		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
-		List<Room> roomList=session.createSQLQuery(sql).addEntity(Room.class).list();
+		Query query=session.createSQLQuery(sql);
+		
+		int n=0;
+		
+		if (!roomQueryForm.getRoomId().equals("")) {
+			query.setString(n, roomQueryForm.getRoomId());
+			n++;
+		}
+		
+		if (!roomQueryForm.getRoomName().equals("")) {
+			query.setString(n, roomQueryForm.getRoomName());
+			n++;
+		}
+		
+		if (!roomQueryForm.getRoomBuilding().equals("")) {
+			query.setString(n, roomQueryForm.getRoomBuilding());
+			n++;
+		}
+		
+		if (!roomQueryForm.getRoomFloor().equals("")) {
+			query.setString(n, roomQueryForm.getRoomFloor());
+			n++;
+		}
+		
+		SQLQuery sqlquery=(SQLQuery)query;
+		List<Room> roomList=sqlquery.addEntity(Room.class).list();
 		return roomList;
 	}
 
@@ -88,7 +113,6 @@ public class RoomDaoImpl implements RoomDao {
 			r.setRoomBuilding(roomAddForm.getBuilding());
 			r.setRoomFloor(roomAddForm.getFloor());
 			r.setRoomArea(roomAddForm.getArea());
-			r.setRoomAddress(roomAddForm.getAddress());
 			r.setRoomOther(roomAddForm.getOther());
 			r.setRoomHire(roomAddForm.getHire());
 			getHibernateTemplate().save(r);
@@ -114,7 +138,6 @@ public class RoomDaoImpl implements RoomDao {
 		room.setRoomBuilding(roomUpdateForm.getBuilding());
 		room.setRoomFloor(roomUpdateForm.getFloor());
 		room.setRoomArea(roomUpdateForm.getArea());
-		room.setRoomAddress(roomUpdateForm.getAddress());
 		room.setRoomOther(roomUpdateForm.getOther());
 		room.setRoomHire(roomUpdateForm.getHire());
 		getHibernateTemplate().update(room);
@@ -126,4 +149,57 @@ public class RoomDaoImpl implements RoomDao {
 			getHibernateTemplate().delete(room);
 		}
 	}
+	
+	
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
+	public List<Room> getNotUseRoomList(RoomQueryForm roomQueryForm) {
+		String sql="select * from room where ROOM_ID not in (select ROOM_ID from rent )";
+		if (!roomQueryForm.getRoomId().equals("")) {
+			sql =sql+"and ROOM_ID=?";
+		}
+		
+		if (!roomQueryForm.getRoomName().equals("")) {
+			sql =sql+"and ROOM_NAME=?";
+		}
+		
+		if (!roomQueryForm.getRoomBuilding().equals("")) {
+			sql =sql+"and ROOM_BUILDING=?";
+		}
+		
+		if (!roomQueryForm.getRoomFloor().equals("")) {
+			sql =sql+"and ROOM_FLOOR=?";
+		}
+		
+		Session session=getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Query query=session.createSQLQuery(sql);
+		
+		int n=0;
+		
+		if (!roomQueryForm.getRoomId().equals("")) {
+			query.setString(n, roomQueryForm.getRoomId());
+			n++;
+		}
+		
+		if (!roomQueryForm.getRoomName().equals("")) {
+			query.setString(n, roomQueryForm.getRoomName());
+			n++;
+		}
+		
+		if (!roomQueryForm.getRoomBuilding().equals("")) {
+			query.setString(n, roomQueryForm.getRoomBuilding());
+			n++;
+		}
+		
+		if (!roomQueryForm.getRoomFloor().equals("")) {
+			query.setString(n, roomQueryForm.getRoomFloor());
+			n++;
+		}
+		
+		SQLQuery sqlquery=(SQLQuery)query;
+		List<Room> roomList=sqlquery.addEntity(Room.class).list();
+		return roomList;
+	}
+	
+	
+	
 }

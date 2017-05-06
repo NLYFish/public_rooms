@@ -16,7 +16,7 @@ if(noExist=="noExist"){
 
 </head>
 <body>
-
+<div><a href="repairManage">返回</a></div>
 <h1>添加维修</h1>
 
 <s:form name="repairAddForm" id="repairAddForm" action="addRepair" method="post">

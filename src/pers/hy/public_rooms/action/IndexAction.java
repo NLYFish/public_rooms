@@ -1,25 +1,46 @@
 package pers.hy.public_rooms.action;
 
-import com.opensymphony.xwork2.ActionSupport;
+import pers.hy.public_rooms.form.RentQueryForm;
+import pers.hy.public_rooms.form.RoomQueryForm;
+import pers.hy.public_rooms.service.IndexManage;
 
-import pers.hy.public_rooms.serviceImpl.HttpSessionFactory;
 
-public class IndexAction extends ActionSupport {
+public class IndexAction {
 
-	public String execute(){
-		if(HttpSessionFactory.getHttpSession("type")==null)
-		{
-			return "login";
-		}else{
-			
-			if(HttpSessionFactory.getHttpSession("type").equals("0")){
-				return "adminIndex";
-			}else if(HttpSessionFactory.getHttpSession("type").equals("1")){
-				return "userIndex";
-			}else{
-			    return "input";
-			}
-		}
+	private IndexManage indexManage;
+	private RoomQueryForm roomQueryForm=new RoomQueryForm();
+	private RentQueryForm rentQueryForm=new RentQueryForm();
 	
+	public void setRentQueryForm(RentQueryForm rentQueryForm){
+		this.rentQueryForm=rentQueryForm;
 	}
+	
+	public RentQueryForm getRentQueryForm(){
+		return this.rentQueryForm;
+	}
+	
+	public void setIndexManage(IndexManage indexManage){
+		this.indexManage=indexManage;
+	} 
+	
+	public void setRoomQueryForm(RoomQueryForm roomQueryForm){
+		this.roomQueryForm=roomQueryForm;
+	}
+	
+	public RoomQueryForm getRoomQueryForm(){
+		return this.roomQueryForm;
+	}
+	
+	public String getNoticeDo(){
+		return indexManage.getNoticeDo();
+	}
+	
+	public String getRoomList(){
+		return indexManage.getRoomList(roomQueryForm);
+	}
+	
+	public String getRentList(){
+		return indexManage.getRentList(rentQueryForm);
+	}
+	
 }

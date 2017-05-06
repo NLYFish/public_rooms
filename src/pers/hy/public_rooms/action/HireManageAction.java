@@ -9,8 +9,8 @@ public class HireManageAction {
 	
 	private HireManage hireManage;
 	private HireQueryForm hireQueryForm=new HireQueryForm();
-	private HireUpdateForm hireUpdateForm=null;
-	private String hireUpdateId=null;
+	private HireUpdateForm hireUpdateForm=new HireUpdateForm();
+	private String hireUpdateId=null; 
 	private HireCountForm hireCountForm=new HireCountForm();
 	
 	public void setHireCountForm(HireCountForm hireCountForm){
@@ -58,7 +58,12 @@ public class HireManageAction {
 	}
 	
 	public String updateHirePage(){
-		return hireManage.updateHirePage(hireUpdateId);
+		if(hireUpdateId==null){
+			return "hireManage";
+		}else{
+			return hireManage.updateHirePage(hireUpdateId);
+		}
+		
 	}
 	
 	public String getHireCount(){

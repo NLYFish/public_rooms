@@ -5,12 +5,16 @@ import pers.hy.public_rooms.form.RentLogsForm;
 import pers.hy.public_rooms.service.RentManage;
 import pers.hy.public_rooms.form.RentQueryForm;
 import pers.hy.public_rooms.form.RentUpdateForm;
+import pers.hy.public_rooms.form.RoomQueryForm;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
 
 import pers.hy.public_rooms.dao.RentDao;
+import pers.hy.public_rooms.dao.RoomDao;
 import pers.hy.public_rooms.bean.Rent;
 
 
@@ -18,6 +22,11 @@ import pers.hy.public_rooms.bean.Rent;
 public class RentManageImpl implements RentManage {
 
 	private RentDao rentDao;
+	private RoomDao roomDao;
+	
+	public void setRoomDao(RoomDao roomDao){
+		this.roomDao=roomDao;
+	}
 	
 	public void setRentDao(RentDao rentDao){
 		this.rentDao=rentDao;
@@ -25,7 +34,7 @@ public class RentManageImpl implements RentManage {
 	
 	public String getRentList(RentQueryForm rentQueryForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "login";
 		}else if(sessionResult.equals("0")){
@@ -42,15 +51,23 @@ public class RentManageImpl implements RentManage {
 	
 	public String addRent(RentAddForm rentAddForm) {
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentManage";
 		}else if(sessionResult.equals("0")){
 			return "rentManage";
 		}else if(sessionResult.equals("1")){
-			if(rentAddForm.getRoomId().equals("")||rentAddForm.getRenterName().equals("")
-					||rentAddForm.getStartDate().equals("")||rentAddForm.getRenter().equals("")||rentAddForm.getRenterId().equals("")
-					||rentAddForm.getRenterPhone().equals("")){
+			
+			List<String> l=new ArrayList<String>();
+			l.add(rentAddForm.getType());
+			l.add(rentAddForm.getRoomId());
+			l.add(rentAddForm.getRenterName());
+			l.add(rentAddForm.getRenter());
+			l.add(rentAddForm.getRenterId());
+			l.add(rentAddForm.getStartDate());
+			l.add(rentAddForm.getRenterPhone());
+			
+			if(Factory.getValidation(l)==false){
 					return "rentAdd";
 				}else{
 					Rent rent=rentDao.addRent(rentAddForm);
@@ -71,7 +88,7 @@ public class RentManageImpl implements RentManage {
 	
 	public String updateRentPage(String rentUpdateId){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentManage";
 		}else if(sessionResult.equals("0")){
@@ -114,15 +131,23 @@ public class RentManageImpl implements RentManage {
 	
 	public String updateRent(RentUpdateForm rentUpdateForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentManage";
 		}else if(sessionResult.equals("0")){
 			return "rentManage";
 		}else if(sessionResult.equals("1")){
-			if(rentUpdateForm.getRoomId().equals("")||rentUpdateForm.getRoomName().equals("")||rentUpdateForm.getRenterName().equals("")
-					||rentUpdateForm.getStartDate().equals("")||rentUpdateForm.getRenter().equals("")||rentUpdateForm.getRenterId().equals("")
-					||rentUpdateForm.getRenterPhone().equals("")){
+			
+			List<String> l=new ArrayList<String>();
+			l.add(rentUpdateForm.getRoomId());
+			l.add(rentUpdateForm.getRoomName());
+			l.add(rentUpdateForm.getRenterName());
+			l.add(rentUpdateForm.getStartDate());
+			l.add(rentUpdateForm.getRenter());
+			l.add(rentUpdateForm.getRenterId());
+			l.add(rentUpdateForm.getRenterPhone());
+			
+			if(Factory.getValidation(l)==false){
 					return "rentManage";
 				}else{
 					rentDao.updateRent(rentUpdateForm);
@@ -136,7 +161,7 @@ public class RentManageImpl implements RentManage {
 	
 	public String deleteRent(String[] rentSelect){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentManage";
 		}else if(sessionResult.equals("0")){
@@ -154,7 +179,7 @@ public class RentManageImpl implements RentManage {
 	
 	public String getRentExpire(){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentManage";
 		}else if(sessionResult.equals("0")){
@@ -170,7 +195,7 @@ public class RentManageImpl implements RentManage {
 	
 	public String rentExpire(String[] rentSelect){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentManage";
 		}else if(sessionResult.equals("0")){
@@ -187,7 +212,7 @@ public class RentManageImpl implements RentManage {
 	
 	public String getRentLogs(RentLogsForm rentLogsForm){
 		
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentManage";
 		}else if(sessionResult.equals("0")){
@@ -202,7 +227,7 @@ public class RentManageImpl implements RentManage {
 	}
 	
 	public String deleteRentLogs(int[] rentLogsSelect){
-		String sessionResult=HttpSessionFactory.getHttpSession("type");	
+		String sessionResult=Factory.getHttpSession("type");	
 		if(sessionResult==null){
 			return "rentLogs";
 		}else if(sessionResult.equals("0")){
@@ -213,6 +238,24 @@ public class RentManageImpl implements RentManage {
 		}else{
 			return "input";
 		}
+	}
+	
+	
+    public String getRoomList(RoomQueryForm roomQueryForm) {
+		
+		String sessionResult=Factory.getHttpSession("type");	
+		if(sessionResult==null){
+			return "login";
+		}else if(sessionResult.equals("0")){
+			return "adminIndex";
+		}else if(sessionResult.equals("1")){
+			ActionContext ctx = ActionContext.getContext();
+			ctx.put("rooms", roomDao.getNotUseRoomList(roomQueryForm));
+			return "roomQuery";
+		}else{
+			return "input";
+		}
+
 	}
 	
 }

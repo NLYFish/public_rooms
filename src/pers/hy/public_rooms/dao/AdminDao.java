@@ -5,6 +5,7 @@ import pers.hy.public_rooms.bean.Admin;
 public interface AdminDao {	
 
 	public Admin getAdminById(String id);
+	public void updatePassword(String id,String newPassword);
 
 }
 
