@@ -8,20 +8,59 @@
 <title>公告管理</title>
 
 </head>
+
 <body>
+<div style="width:750px;height:30px;position:absolute;top:10px;border-bottom:1px solid #000">
+<a style="position:relative;left:700px" href="">首页</a>
+</div>
 
-<div><a href="user">返回</a></div>
-<h1>公告管理</h1>
+<div style="position:absolute;top:35px;">
 
-<div>公告</div>
+<div style="float:left;position:relative;">
+<h1>公用房管理系统</h1>
+</div>
 
-<s:textarea name="noticeText" id="noticeText" style="height:150px;width:500px;"></s:textarea>
+<div style="float:left;position:relative;top:21px;left:15px">
+<p>工作人员  ${session.id}</p>
+</div>
+
+</div>
+
+<div style="position:relative;top:110px">
+
+<div style="width:160px;height:400px;float:left;position:relative;border-right:1px solid #000">
+<a href="rentManage">公用房分配/租赁管理</a><br/>
+<a href="repairManage">公用房维修管理</a><br/>
+<a href="hireCount">公用房财务管理</a><br/>
+<a href="getMessageDo">公用房通知管理</a><br/>
+<a href="getNoticeDo">公用房公告管理</a><br/>
+<a href="updateInformationPage">个人信息</a><br/>
+<a href="updatePasswordPage">修改密码</a><br/>
+<a href="exit">退出</a>
+</div>
+
+<div style="float:left;position:relative;left:5px">
+
+<div style="width:585px;height:30px;position:relative;border-bottom:1px solid #000">
+<p>公告管理</p>
+</div>
+
+<div style="position:relative;top:10px">
+
+<s:form action="uploadNotice" method="post" enctype="multipart/form-data">   
+<input type="file" name="file"/>
+<input type="submit" value="上传"/>
+</s:form>
 
 <br/>
 
+<s:textarea name="noticeText" id="noticeText" style="height:102px;width:580px;"></s:textarea>
+
+<br/><br/>
+
 <s:form name="noticeDeleteForm" id="noticeDeleteForm" action="deleteNotice" method="post">
 
-<table id="noticeList" border="1 "style="border-collapse:collapse">
+<table id="noticeList" border="1 "style="border-collapse:collapse;width:580px">
 <caption>公告列表</caption>
 <tr>
 <td></td>
@@ -47,19 +86,18 @@
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
 
-<br/>
-
 <s:submit value="删除"/>
-<s:form action="uploadNotice" method="post" enctype="multipart/form-data">   
-<input type="file" name="file"/>
-<input type="submit" value="上传"/>
-</s:form>
- 
 
 </s:form>
 
+
+</div>
+
+</div>
+
+</div>
 
 </body>
-</html>
 <script type="text/javascript" src="js/pageScript.js"></script>
 <script type="text/javascript" src="js/noticeScript.js"></script>
+</html>

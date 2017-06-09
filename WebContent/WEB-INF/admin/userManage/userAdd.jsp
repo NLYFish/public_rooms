@@ -5,26 +5,68 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加用户</title>
+<title>添加工作人员</title>
 <script type="text/javascript">
 var exist="${requestScope.exist}"
 if(exist=="exist"){
-	alert("用户名已存在！");
+	alert("账号已存在！");
 }
 </script>
 </head>
+
+
 <body>
-<div><a href="userManage">返回</a></div>
-<h1>添加用户</h1>
+<div style="width:750px;height:30px;position:absolute;top:10px;border-bottom:1px solid #000">
+<a style="position:relative;left:700px" href="">首页</a>
+</div>
+
+<div style="position:absolute;top:35px;">
+
+<div style="float:left;position:relative;">
+<h1>公用房管理系统</h1>
+</div>
+
+<div style="float:left;position:relative;top:21px;left:15px">
+<p>管理员  ${session.id}</p>
+</div>
+
+</div>
+
+<div style="position:relative;top:110px">
+
+<div style="width:160px;height:260px;float:left;position:relative;border-right:1px solid #000">
+<a href="userManage">工作人员管理</a><br/>
+<a href="roomManage">公用房管理</a><br/>
+<a href="updatePasswordPage">修改密码</a><br/>
+<a href="exit">退出</a>
+</div>
+
+
+
+<div style="float:left;position:relative;left:5px">
+
+<div style="width:585px;height:30px;position:relative;border-bottom:1px solid #000">
+<p>添加工作人员</p>
+</div>
+
+<div style="position:relative;top:10px">
 
 <s:form name="userAddForm" id="userAddForm" action="addUser" method="post">
-用户名：<s:textfield name="userAddForm.id"/><br/>
+账号：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.id"/><br/>
 职工号：<s:textfield name="userAddForm.no"/><br/>
 姓名：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.name"/><br/>
 电话：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.phone"/><br/>
-密码：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.password" value="123456"/><br/>
+密码：&nbsp;&nbsp;&nbsp;&nbsp;<s:textfield name="userAddForm.password" value="123456"/><br/><br/>
 <s:submit value="添加"/>
+<a href="userManage">返回</a>
 </s:form>
 
+</div>
+
+</div>
+
+</div>
+
 </body>
+
 </html>

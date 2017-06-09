@@ -28,18 +28,50 @@ function rentExpire(){
 </script>
 
 </head>
-<body>
 
-<div><a href="uRoomQuery">未使用公用房查询</a></div>
-<div><a href="rentLogs">分配租赁记录</a></div>
-<div><a href="user">返回</a></div>
-<h1>分配/租赁管理</h1>
+<body>
+<div style="width:750px;height:30px;position:absolute;top:10px;border-bottom:1px solid #000">
+<a style="position:relative;left:700px" href="">首页</a>
+</div>
+
+<div style="position:absolute;top:35px;">
+
+<div style="float:left;position:relative;">
+<h1>公用房管理系统</h1>
+</div>
+
+<div style="float:left;position:relative;top:21px;left:15px">
+<p>工作人员  ${session.id}</p>
+</div>
+
+</div>
+
+<div style="position:relative;top:110px">
+
+<div style="width:160px;height:380px;float:left;position:relative;border-right:1px solid #000">
+<a href="rentManage">公用房分配/租赁管理</a><br/>
+<a href="repairManage">公用房维修管理</a><br/>
+<a href="hireCount">公用房财务管理</a><br/>
+<a href="getMessageDo">公用房通知管理</a><br/>
+<a href="getNoticeDo">公用房公告管理</a><br/>
+<a href="updateInformationPage">个人信息</a><br/>
+<a href="updatePasswordPage">修改密码</a><br/>
+<a href="exit">退出</a>
+</div>
+
+<div style="float:left;position:relative;left:5px">
+
+<div style="width:585px;height:30px;position:relative;border-bottom:1px solid #000">
+<p>分配/租赁管理</p>
+</div>
+
+<div style="position:relative;top:10px">
 
 <s:form name="rentQueryForm" id="rentQueryForm" action="rentManage" method="get">
 房号<s:textfield name="rentQueryForm.roomId" size="10"/>
 房名<s:textfield name="rentQueryForm.roomName" size="10"/>
 类型<s:select name="rentQueryForm.type" list="#{'0':'分配','1':'租赁'}" headerKey="" headerValue="全部"/><br/>
-部门<s:textfield name="rentQueryForm.renter" size="10"/>
+所属<s:textfield name="rentQueryForm.renter" size="10"/>
 负责人<s:textfield name="rentQueryForm.renterName" size="10"/>
 身份证/职工号<s:textfield name="rentQueryForm.renterId" size="10"/>
 <s:submit value="查询"/>
@@ -50,7 +82,7 @@ function rentExpire(){
 
 <s:form name="rentUpdatePageForm" id="rentUpdatePageForm" action="updateRentPage" mehtod="post">
 房号<s:textfield name="rentUpdateId" size="10"/><s:submit value="修改"/>
-<input type="button" value="添加" onclick="location.href='addRent'"/>
+<a href="addRent">添加</a>
 </s:form>
 
 <br/>
@@ -65,7 +97,7 @@ function rentExpire(){
 <td>房号</td>
 <td>房名</td>
 <td>类型</td>
-<td>部门</td>
+<td>所属</td>
 <td>负责人</td>
 <td>身份证/职工号</td>
 <td>电话</td>
@@ -107,13 +139,22 @@ function rentExpire(){
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
 
-<br/>
+<br/><br/>
 
 <input type="button" value="删除" onclick="deleteRent()"/>
 <input type="button" value="到期处理" onclick="rentExpire()"/>
-
+<a href="roomQuery">公用房查询(未使用)</a>
+<a href="rentLogs">分配租赁记录</a>
 </s:form>
 
+
+
+</div>
+
+</div>
+
+</div>
+
 </body>
-</html>
 <script type="text/javascript" src="js/pageScript.js"></script>
+</html>

@@ -142,13 +142,22 @@ public class LoginManageImpl implements LoginManage {
 				return "passwordUpdate";
 			}else{		
 				if(sessionResult.equals("0")){
-					adminDao.updatePassword(id, passwordUpdateForm.getNewPassword());
-					return "login";
+					if(adminDao.getAdminById(id).getAdminPassword().equals(passwordUpdateForm.getOldPassword())){
+						adminDao.updatePassword(id, passwordUpdateForm.getNewPassword());
+						return "login";
+					}else{
+						Factory.setHttpRequest("error", "error");
+						return "passwordUpdate";
+					}
 					
 				}else if(sessionResult.equals("1")){
-					userDao.updatePassword(id, passwordUpdateForm.getNewPassword());
-					return "login";
-					
+					if(userDao.getUserById(id).getUserPassword().equals(passwordUpdateForm.getOldPassword())){
+						userDao.updatePassword(id, passwordUpdateForm.getNewPassword());
+						return "login";
+					}else{
+						Factory.setHttpRequest("error", "error");
+						return "passwordUpdate";
+					}
 				}else{
 					return "input";
 				}

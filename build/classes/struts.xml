@@ -194,13 +194,6 @@
             <result name="input" type="redirect">/</result>
         </action>
          
-         <action name="uRoomQuery" class="pers.hy.public_rooms.action.RentManageAction" method="getRoomList">
-            <result name="roomQuery">/WEB-INF/user/rentManage/roomQuery.jsp</result>
-            <result name="login">/WEB-INF/login/login.jsp</result>
-            <result name="adminIndex">/WEB-INF/admin/adminIndex.jsp</result>
-            <result name="input" type="redirect">/</result>
-        </action>
-         
     </package>
     
     

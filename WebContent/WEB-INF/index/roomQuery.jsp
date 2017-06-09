@@ -5,12 +5,40 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>未使用公用房查询</title>
+<title>公用房查询(未使用)</title>
 
 </head>
+
 <body>
-<div><a href="">返回</a></div>
-<h1>未使用公用房查询</h1>
+<div style="width:750px;height:30px;position:absolute;top:10px;border-bottom:1px solid #000">
+<a style="position:relative;left:700px" href="">首页</a>
+</div>
+
+<div style="position:absolute;top:35px;">
+
+<div style="float:left;position:relative;">
+<h1>公用房管理系统</h1>
+</div>
+
+<div style="float:left;position:relative;top:21px;left:15px">
+<p>公用房查询(未使用)</p>
+</div>
+
+</div>
+
+<div style="position:relative;top:110px">
+
+<div style="width:160px;height:340px;float:left;position:relative;border-right:1px solid #000">
+
+</div>
+
+<div style="float:left;position:relative;left:5px">
+
+<div style="width:585px;height:30px;position:relative;border-bottom:1px solid #000">
+<p>公用房查询(未使用)</p>
+</div>
+
+<div style="position:relative;top:10px">
 
 <s:form name="roomQueryForm" id="roomQueryForm" action="roomQuery" method="get">
 房号<s:textfield name="roomQueryForm.roomId" size="10"/>
@@ -25,7 +53,6 @@
 <table id="roomList" border="1 "style="border-collapse:collapse">
 <caption>公用房列表</caption>
 <tr>
-<td></td>
 <td>房号</td>
 <td>房名</td>
 <td>建筑</td>
@@ -38,7 +65,6 @@
 <tbody id="tbody">
 <s:iterator value="%{#request.rooms}"> 
 <tr> 
-<td><input type="checkbox"  name="roomSelect" value="${roomId}"></td>
 <td><s:property value="%{roomId}"/></td>  
 <td><s:property value="%{roomName}"/></td>
 <td><s:property value="%{roomBuilding}"/></td>  
@@ -59,6 +85,15 @@
 <span id="spanLast">最后一页</span> 
 第<span id="spanPageNum"></span>页/共<span id="spanTotalPage"></span>页
 
+<br/><br/>
+<a href="rentManage">返回</a>
+</div>
+
+</div>
+
+</div>
+
 </body>
-</html>
+
 <script type="text/javascript" src="js/pageScript.js"></script>
+</html>

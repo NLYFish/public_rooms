@@ -8,7 +8,7 @@ var spanFirst = document.getElementById("spanFirst");
 var spanLast = document.getElementById("spanLast");
 
 var numberRowsInTable = theTable.rows.length;
-var pageSize = 10;
+var pageSize = 5;
 var page = 1;
 
 function next() {

@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,15 +48,24 @@ public class MessageManageImpl implements MessageManage {
 		        
 		        String path = request.getSession().getServletContext().getRealPath("/message");
 		        	        
+		        System.out.println(path);
+		        
 		        File f=new File(path);
 		        f.mkdir();
 		        
 		        String fileName="通知.txt";
 		        
+		        FileOutputStream fos = new FileOutputStream(f+"/"+fileName);   
+		        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");   
+		        osw.write(message);   
+		        osw.flush(); 
+		        osw.close();
+		        
+		        /*
 				BufferedWriter w=new BufferedWriter(new FileWriter(f+"/"+fileName));
 				w.write(message);
 				w.flush();
-				w.close();
+				w.close();*/
 			}catch(Exception e){}
 			
 			return "messageManage";
@@ -129,11 +139,12 @@ public class MessageManageImpl implements MessageManage {
 		        
 		        String path = request.getSession().getServletContext().getRealPath("/message/notice");
 		        
+		        System.out.println(path);
+		        
 		        File f=new File(path);
 		        f.mkdir();
 		        
 		        InputStream is = new FileInputStream(file);
-		        
 		        OutputStream os = new FileOutputStream(new File(path, fileFileName));
 		        
 		        byte[] buffer = new byte[1];
